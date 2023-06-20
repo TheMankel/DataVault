@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import { Typography, Link } from '@mui/material';
+import { SxProps } from '@mui/material/styles';
 
 interface ILogoProps {
   title: string;
+  sx?: SxProps;
 }
 
-const Logo = ({ title }: ILogoProps) => {
+const Logo = ({ title, ...rest }: ILogoProps) => {
   return (
     <Link
       component={NavLink}
@@ -13,7 +15,7 @@ const Logo = ({ title }: ILogoProps) => {
       underline='none'
       to='/'
       alignItems='center'
-      sx={{ display: { xs: 'none', md: 'flex' } }}>
+      {...rest}>
       <img
         src='/vite.svg'
         alt='Logo'
