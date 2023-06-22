@@ -16,8 +16,9 @@ const LanguageMenu = () => {
     setIsMenuOpen(false);
   };
 
-  const handleSelectLanguage = (language: string) => {
-    setSelectedLanguage(language); // Update the selected language state
+  const handleSelectLanguage = (event: React.MouseEvent<HTMLDivElement>) => {
+    const language = event.currentTarget.id;
+    setSelectedLanguage(language);
     handleCloseMenu();
   };
 
@@ -28,7 +29,8 @@ const LanguageMenu = () => {
       position='relative'>
       <Button
         variant='outlined'
-        endIcon={isMenuOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}>
+        endIcon={isMenuOpen ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+        sx={{ width: '80px' }}>
         {selectedLanguage}
       </Button>
       {isMenuOpen && (
@@ -41,14 +43,24 @@ const LanguageMenu = () => {
           }}>
           <List>
             <ListItemButton
-              onClick={() => handleSelectLanguage('PL')}
-              sx={{ display: 'flex', justifyContent: 'center' }}>
-              <PL width={24} />
+              id='PL'
+              onClick={handleSelectLanguage}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <PL width={24} style={{ border: '1px solid black' }} />
             </ListItemButton>
             <ListItemButton
-              onClick={() => handleSelectLanguage('GB')}
-              sx={{ display: 'flex', justifyContent: 'center' }}>
-              <GB width={24} />
+              id='GB'
+              onClick={handleSelectLanguage}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <GB width={24} style={{ border: '1px solid black' }} />
             </ListItemButton>
           </List>
         </Paper>
