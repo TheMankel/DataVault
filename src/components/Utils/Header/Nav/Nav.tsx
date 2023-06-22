@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import {
+  Box,
   Link,
   List,
   ListItem,
@@ -21,6 +22,8 @@ const Nav = <T extends { name: string; url: string }>({
   closeDrawer = () => {},
   ...rest
 }: INavProps<T>) => {
+  const sx = buttonType ? {} : { display: { xs: 'none', md: 'flex' } };
+
   if (!pagesUrls.length) return null;
 
   const linkElements = pagesUrls.map((page, i) => {
@@ -70,9 +73,11 @@ const Nav = <T extends { name: string; url: string }>({
   });
 
   return (
-    <List disablePadding {...rest}>
-      {linkElements}
-    </List>
+    <Box component='nav' sx={sx}>
+      <List disablePadding {...rest}>
+        {linkElements}
+      </List>
+    </Box>
   );
 };
 
