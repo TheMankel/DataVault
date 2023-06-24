@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, AppBar, Toolbar, Box } from '@mui/material';
+import { Container, AppBar, Toolbar } from '@mui/material';
 import NavMenu from './NavMenu/NavMenu';
 import DrawerMenu from './NavDrawer/NavDrawer';
 import Logo from './Logo/Logo';
@@ -7,6 +7,7 @@ import Nav from './Nav/Nav';
 import LanguageMenu from './LanguageMenu/LanguageMenu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+const title = 'DataVault';
 const pagesUrls = [
   { name: 'Home', url: '/' },
   { name: 'Data', url: '/data' },
@@ -14,9 +15,7 @@ const pagesUrls = [
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
-  const matches = useMediaQuery('(min-width:900px)');
-
-  const title = 'DataVault';
+  const showComponents = useMediaQuery('(min-width:900px)');
 
   return (
     <AppBar
@@ -30,14 +29,14 @@ const Header = () => {
             color: 'text.primary',
             justifyContent: 'space-between',
           }}>
-          {!matches && <NavMenu handleOpenDrawer={setOpenDrawer} />}
+          {!showComponents && <NavMenu handleOpenDrawer={setOpenDrawer} />}
           <DrawerMenu
             title={title}
             openDrawer={openDrawer}
             handleOpenDrawer={setOpenDrawer}
             pagesUrls={pagesUrls}
           />
-          {matches && (
+          {showComponents && (
             <>
               <Logo
                 title={title}
@@ -46,9 +45,7 @@ const Header = () => {
               <Nav pagesUrls={pagesUrls} sx={{ display: 'flex' }} />
             </>
           )}
-          <Box flex={1} display='flex' justifyContent='flex-end'>
-            <LanguageMenu />
-          </Box>
+          <LanguageMenu />
         </Toolbar>
       </Container>
     </AppBar>
