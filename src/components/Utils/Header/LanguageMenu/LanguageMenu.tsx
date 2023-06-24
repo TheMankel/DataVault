@@ -1,7 +1,7 @@
-import { Box, Paper, List } from '@mui/material';
+import { Box } from '@mui/material';
 import LanguageButton from './LanguageButton/LanguageButton';
-import LanguageMenuItem from './LanguageMenuItem/LanguageMenuItem';
 import useLanguageMenu from './hooks/useLanguageMenu';
+import LanguageMenuList from './LanguageMenuList/LanguageMenuList';
 
 const languagesFlags = [{ id: 'PL' }, { id: 'GB' }];
 
@@ -21,29 +21,15 @@ const LanguageMenu = () => {
         onMouseEnter={handleOpenMenu}
         onMouseLeave={handleCloseMenu}>
         <LanguageButton
-          isMenuOpen={isMenuOpen}
+          open={isMenuOpen}
           selectedLanguage={selectedLanguage}
           onClick={handleOpenMenu}
         />
-        {isMenuOpen && (
-          <Paper
-            sx={{
-              position: 'absolute',
-              top: '100%',
-              width: '100%',
-              zIndex: 1300,
-            }}>
-            <List>
-              {languagesFlags.map((flag) => (
-                <LanguageMenuItem
-                  key={flag.id}
-                  id={flag.id}
-                  onClick={handleSelectLanguage}
-                />
-              ))}
-            </List>
-          </Paper>
-        )}
+        <LanguageMenuList
+          open={isMenuOpen}
+          languagesFlags={languagesFlags}
+          handleSelectLanguage={handleSelectLanguage}
+        />
       </Box>
     </Box>
   );
