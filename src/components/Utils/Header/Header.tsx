@@ -29,14 +29,13 @@ const Header = () => {
             color: 'text.primary',
             justifyContent: 'space-between',
           }}>
-          {!showComponents && <NavMenu handleOpenDrawer={setOpenDrawer} />}
           <DrawerMenu
             title={title}
             openDrawer={openDrawer}
             handleOpenDrawer={setOpenDrawer}
             pagesUrls={pagesUrls}
           />
-          {showComponents && (
+          {showComponents ? (
             <>
               <Logo
                 title={title}
@@ -44,6 +43,8 @@ const Header = () => {
               />
               <Nav pagesUrls={pagesUrls} sx={{ display: 'flex' }} />
             </>
+          ) : (
+            <NavMenu handleOpenDrawer={setOpenDrawer} />
           )}
           <LanguageMenu />
         </Toolbar>
