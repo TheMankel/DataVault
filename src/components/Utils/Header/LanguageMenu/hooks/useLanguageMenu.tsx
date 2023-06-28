@@ -1,8 +1,12 @@
 import { useState, useCallback } from 'react';
+import useLocalStorage from '../../../../../hooks/useLocalStorage';
 
 const useLanguageMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('PL');
+  const [selectedLanguage, setSelectedLanguage] = useLocalStorage<string>({
+    key: 'language',
+    initialValue: 'PL',
+  });
 
   const handleOpenMenu = useCallback(() => {
     setIsMenuOpen(true);
