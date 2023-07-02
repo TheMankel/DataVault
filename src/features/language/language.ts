@@ -1,32 +1,32 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
 import produce from 'immer';
 
-interface ILanguages {
+interface ILanguage {
   [key: string]: {
     name: string;
-    main: string;
-    data: string;
+    code: string;
+    urls: { main: string; data: string };
   };
 }
 
-const languageValues: ILanguages = {
+const languageValues: ILanguage = {
   PL: {
     name: 'polish',
-    main: 'Start',
-    data: 'Dane',
+    code: 'PL',
+    urls: { main: 'Start', data: 'Dane' },
   },
   GB: {
     name: 'english',
-    main: 'Home',
-    data: 'Data',
+    code: 'GB',
+    urls: { main: 'Home', data: 'Data' },
   },
 };
 
 const initialState = {
-  language: languageValues.polish,
+  data: languageValues.PL,
 };
 
-const languagesSlice = createSlice({
+const languageSlice = createSlice({
   name: 'language',
   initialState,
   reducers: {
@@ -34,8 +34,8 @@ const languagesSlice = createSlice({
       const languageCode = action.payload;
       const language = languageValues[languageCode];
       if (language) {
-        return produce(state, (draft) => {
-          draft.language = language;
+        return produce(state, (draft: Draft<typeof state>) => {
+          draft.data = language;
         });
       } else {
         throw new Error('Selected language is not supported');
@@ -44,6 +44,6 @@ const languagesSlice = createSlice({
   },
 });
 
-export const { handleLanguage } = languagesSlice.actions;
+export const { handleLanguage } = languageSlice.actions;
 
-export default languagesSlice.reducer;
+export default languageSlice.reducer;
