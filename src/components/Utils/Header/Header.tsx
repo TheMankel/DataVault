@@ -1,21 +1,24 @@
 import { useState } from 'react';
-import { Container, AppBar, Toolbar } from '@mui/material';
+import { Container, AppBar, Toolbar, useMediaQuery } from '@mui/material';
 import NavMenu from './NavMenu/NavMenu';
 import DrawerMenu from './NavDrawer/NavDrawer';
 import Logo from './Logo/Logo';
 import Nav from './Nav/Nav';
 import LanguageMenu from './LanguageMenu/LanguageMenu';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useAppSelector } from '../../../store/hooks';
+import { RootState } from '../../../store';
 
 const title = 'DataVault';
-const pagesUrls = [
-  { name: 'Home', url: '/' },
-  { name: 'Data', url: '/data' },
-];
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const showComponents = useMediaQuery('(min-width:900px)');
+  const urls = useAppSelector((state: RootState) => state.language.data.urls);
+
+  const pagesUrls = [
+    { name: urls.main, url: '/' },
+    { name: urls.data, url: '/data' },
+  ];
 
   return (
     <AppBar

@@ -6,13 +6,8 @@ import LanguageMenuList from './LanguageMenuList/LanguageMenuList';
 const languagesFlags = [{ id: 'PL' }, { id: 'GB' }];
 
 const LanguageMenu = () => {
-  const {
-    isMenuOpen,
-    selectedLanguage,
-    handleOpenMenu,
-    handleCloseMenu,
-    handleSelectLanguage,
-  } = useLanguageMenu();
+  const { isMenuOpen, handleOpenMenu, handleCloseMenu, handleSelectLanguage } =
+    useLanguageMenu();
 
   return (
     <Box flex={1} display='flex' justifyContent='flex-end'>
@@ -20,11 +15,7 @@ const LanguageMenu = () => {
         position='relative'
         onMouseEnter={handleOpenMenu}
         onMouseLeave={handleCloseMenu}>
-        <LanguageButton
-          open={isMenuOpen}
-          selectedLanguage={selectedLanguage}
-          onClick={handleOpenMenu}
-        />
+        <LanguageButton open={isMenuOpen} />
         <LanguageMenuList
           open={isMenuOpen}
           languagesFlags={languagesFlags}
