@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
-interface ILocalStorageArgs<T> {
+interface ILocalStorageProps<T> {
   key: string;
   initialValue: T;
 }
 
-const useLocalStorage = <T,>({ key, initialValue }: ILocalStorageArgs<T>) => {
+const useLocalStorage = <T,>({ key, initialValue }: ILocalStorageProps<T>) => {
   const [value, setValue] = useState<T>(() => {
     const storedValue = localStorage.getItem(key);
     if (storedValue !== null) return JSON.parse(storedValue);

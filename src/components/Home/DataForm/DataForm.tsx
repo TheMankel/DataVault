@@ -1,64 +1,59 @@
-import { Box, Button, Grid, TextField } from '@mui/material';
+import { FormProvider } from 'react-hook-form';
+import { Box, Button, Grid } from '@mui/material';
+import useDataForm from './hooks/useDataForm';
+import InputController from '../../Utils/Input/InputController';
+import { useAppSelector } from '../../../store/hooks';
+import { RootState } from '../../../store';
 
 const Form = () => {
+  const { methods, handleFormCancel, handleFormSubmit } = useDataForm();
+  const { dataForm, actionButtons } = useAppSelector((state: RootState) => ({
+    dataForm: state.language.data.dataForm,
+    actionButtons: state.language.data.actionButtons,
+  }));
+
   return (
-    <Box component='form' noValidate>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <TextField
-            required
-            fullWidth
-            id='firstname'
-            label='Firstname'
-            aria-label='Firstname'
-            type='text'
-          />
+    <FormProvider {...methods}>
+      <Box
+        component='form'
+        onSubmit={methods.handleSubmit(handleFormSubmit)}
+        noValidate>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <InputController name='firstname' label={dataForm.firstname} />
+          </Grid>
+          <Grid item xs={6}>
+            <InputController name='surname' label={dataForm.surname} />
+          </Grid>
+          <Grid item xs={12}>
+            <InputController
+              name='date_of_birth'
+              label={dataForm.date_of_birth}
+              type='date'
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputController
+              name='about_you'
+              label={dataForm.about_you}
+              multiline
+              rows={4}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Button fullWidth variant='outlined' onClick={handleFormCancel}>
+              {actionButtons.cancel}
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button fullWidth variant='contained' type='submit'>
+              {actionButtons.submit}
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            required
-            fullWidth
-            id='surname'
-            label='Surname'
-            aria-label='Surname'
-            type='text'
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            id='date_of_birth'
-            label='Date of Birth'
-            aria-label='Date of Birth'
-            type='date'
-            InputLabelProps={{ shrink: true }}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            fullWidth
-            multiline
-            rows={4}
-            id='about_you'
-            label='About You'
-            aria-label='About You'
-            type='text'
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Button fullWidth variant='outlined'>
-            Cancel
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
-          <Button fullWidth variant='contained' type='submit'>
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </FormProvider>
   );
 };
 
