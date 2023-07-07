@@ -24,19 +24,24 @@ const InputController = ({
   const {
     field,
     fieldState: { error },
-  } = useController({ control, name });
+  } = useController({
+    name,
+    control,
+    rules: { required },
+  });
 
   return (
     <TextField
       {...field}
+      inputRef={field.ref}
+      value={field.value}
+      name={field.name}
       required={required}
       fullWidth
-      ref={field.ref}
       id={name}
       label={label}
       aria-label={label}
       type={type}
-      value={field.value}
       error={!!error?.message}
       helperText={error?.message}
       InputLabelProps={InputLabelProps}
