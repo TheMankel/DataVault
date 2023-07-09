@@ -3,14 +3,17 @@ import { Box, Button, Grid } from '@mui/material';
 import useDataForm from './hooks/useDataForm';
 import InputController from '../../Utils/Input/InputController';
 import { useAppSelector } from '../../../store/hooks';
-import { RootState } from '../../../store';
+import { shallowEqual } from 'react-redux';
 
 const Form = () => {
   const { methods, handleFormCancel, handleFormSubmit } = useDataForm();
-  const { dataForm, actionButtons } = useAppSelector((state: RootState) => ({
-    dataForm: state.language.data.dataForm,
-    actionButtons: state.language.data.actionButtons,
-  }));
+  const { dataForm, actionButtons } = useAppSelector(
+    (state) => ({
+      dataForm: state.language.data.dataForm,
+      actionButtons: state.language.data.actionButtons,
+    }),
+    shallowEqual,
+  );
 
   return (
     <FormProvider {...methods}>

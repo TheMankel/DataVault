@@ -6,7 +6,7 @@ import { DataType } from '../../../../types/DataType';
 import { DataSchema } from '../../../../schemas/DataSchema';
 
 const useDataForm = () => {
-  const defaultValues = {
+  const defaultValues: DataType = {
     id: nanoid(),
     firstname: '',
     surname: '',
