@@ -1,12 +1,12 @@
 import { FormProvider } from 'react-hook-form';
 import { Box, Button, Grid } from '@mui/material';
-import useDataForm from './hooks/useDataForm';
-import InputController from '../../Utils/Input/InputController';
+import usePersonalDataForm from './hooks/usePersonalDataForm';
+import InputController from '../../Utils/InputController/InputController';
 import { useAppSelector } from '../../../store/hooks';
 import { shallowEqual } from 'react-redux';
 
-const Form = () => {
-  const { methods, handleFormCancel, handleFormSubmit } = useDataForm();
+const PersonalDataForm = () => {
+  const { methods, handleFormCancel, handleFormSubmit } = usePersonalDataForm();
   const { dataForm, actionButtons } = useAppSelector(
     (state) => ({
       dataForm: state.language.data.dataForm,
@@ -60,4 +60,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default PersonalDataForm;

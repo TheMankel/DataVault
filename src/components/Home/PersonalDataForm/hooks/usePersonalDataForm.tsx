@@ -2,11 +2,11 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { nanoid } from 'nanoid';
-import { DataType } from '../../../../types/DataType';
-import { DataSchema } from '../../../../schemas/DataSchema';
+import { PersonalDataType } from '../../../../types/PersonalDataType';
+import PersonalDataSchema from '../../../../schemas/PersonalDataSchema';
 
-const useDataForm = () => {
-  const defaultValues: DataType = {
+const usePersonalDataForm = () => {
+  const defaultValues: PersonalDataType = {
     id: nanoid(),
     firstname: '',
     surname: '',
@@ -15,9 +15,9 @@ const useDataForm = () => {
       .substring(0, 10) as unknown as Date,
     about_you: '',
   };
-  const methods = useForm<DataType>({
+  const methods = useForm<PersonalDataType>({
     defaultValues: defaultValues,
-    resolver: yupResolver(DataSchema),
+    resolver: yupResolver(PersonalDataSchema()),
     mode: 'onSubmit',
   });
 
@@ -26,7 +26,13 @@ const useDataForm = () => {
   }, []);
 
   const handleFormSubmit = useCallback(
-    ({ id, firstname, surname, date_of_birth, about_you }: DataType) => {
+    ({
+      id,
+      firstname,
+      surname,
+      date_of_birth,
+      about_you,
+    }: PersonalDataType) => {
       console.log(id, firstname, surname, date_of_birth, about_you);
     },
     [],
@@ -35,4 +41,4 @@ const useDataForm = () => {
   return { methods, handleFormCancel, handleFormSubmit };
 };
 
-export default useDataForm;
+export default usePersonalDataForm;

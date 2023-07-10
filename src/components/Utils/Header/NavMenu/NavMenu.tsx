@@ -1,8 +1,9 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Box, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 interface INavMenuProps {
-  handleOpenDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+  handleOpenDrawer: Dispatch<SetStateAction<boolean>>;
 }
 
 const NavMenu = ({ handleOpenDrawer }: INavMenuProps) => {
