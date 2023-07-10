@@ -6,14 +6,13 @@ import Logo from './Logo/Logo';
 import Nav from './Nav/Nav';
 import LanguageMenu from './LanguageMenu/LanguageMenu';
 import { useAppSelector } from '../../../store/hooks';
-import { RootState } from '../../../store';
 
 const title = 'DataVault';
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const showComponents = useMediaQuery('(min-width:900px)');
-  const urls = useAppSelector((state: RootState) => state.language.data.urls);
+  const urls = useAppSelector((state) => state.language.data.urls);
 
   const pagesUrls = [
     { name: urls.main, url: '/' },
