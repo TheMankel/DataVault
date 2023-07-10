@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   Box,
@@ -12,7 +13,7 @@ import { SxProps } from '@mui/material/styles';
 interface INavProps<T> {
   pagesUrls: T[];
   buttonType?: boolean;
-  closeDrawer?: React.Dispatch<React.SetStateAction<boolean>>;
+  closeDrawer?: Dispatch<SetStateAction<boolean>>;
   sx?: SxProps;
 }
 
