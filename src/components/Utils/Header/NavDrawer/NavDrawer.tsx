@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Drawer, Box, IconButton, Divider } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Logo from '../Logo/Logo';
@@ -6,7 +7,7 @@ import Nav from '../Nav/Nav';
 interface IDrawerMenuProps<T> {
   openDrawer: boolean;
   title: string;
-  handleOpenDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+  handleOpenDrawer: Dispatch<SetStateAction<boolean>>;
   pagesUrls: T[];
 }
 
