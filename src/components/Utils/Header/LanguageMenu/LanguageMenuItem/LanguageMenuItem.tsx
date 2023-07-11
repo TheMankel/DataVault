@@ -1,19 +1,17 @@
-import React from 'react';
 import { ListItemButton } from '@mui/material';
 import Flags from 'country-flag-icons/react/3x2';
 
-interface LanguageMenuItemProps {
+interface ILanguageMenuItemProps {
   id: string;
-  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-const LanguageMenuItem = ({ id, onClick }: LanguageMenuItemProps) => {
+const LanguageMenuItem = ({ id }: ILanguageMenuItemProps) => {
   const Flag = Flags[id.toUpperCase() as keyof typeof Flags];
 
   return (
     <ListItemButton
       id={id}
-      onClick={onClick}
+      component='li'
       sx={{
         display: 'flex',
         justifyContent: 'center',
