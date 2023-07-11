@@ -3,16 +3,13 @@ import { Button, Typography } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { useAppSelector } from '../../../../../store/hooks';
-import { RootState } from '../../../../../store';
 
-interface LanguageButtonProps {
+interface ILanguageButtonProps {
   open: boolean;
 }
 
-const LanguageButton: React.FC<LanguageButtonProps> = ({ open }) => {
-  const selectedLanguage = useAppSelector(
-    (state: RootState) => state.language.data.code,
-  );
+const LanguageButton = ({ open }: ILanguageButtonProps) => {
+  const selectedLanguage = useAppSelector((state) => state.language.data.code);
 
   return (
     <Button
