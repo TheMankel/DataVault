@@ -1,18 +1,18 @@
-import React from 'react';
+import { MouseEvent } from 'react';
 import { Paper, List } from '@mui/material';
 import LanguageMenuItem from '../LanguageMenuItem/LanguageMenuItem';
 
-interface ILanguageMenuList<T> {
+interface ILanguageMenuListProps<T> {
   open: boolean;
   languagesFlags: T[];
-  handleSelectLanguage: (event: React.MouseEvent<HTMLDivElement>) => void;
+  handleSelectLanguage: (event: MouseEvent<HTMLUListElement>) => void;
 }
 
 const LanguageMenuList = <T extends { id: string }>({
   open,
   languagesFlags,
   handleSelectLanguage,
-}: ILanguageMenuList<T>) => {
+}: ILanguageMenuListProps<T>) => {
   if (!open) return null;
 
   return (
@@ -23,13 +23,9 @@ const LanguageMenuList = <T extends { id: string }>({
         width: '100%',
         zIndex: 1300,
       }}>
-      <List>
+      <List onClick={handleSelectLanguage}>
         {languagesFlags.map((flag) => (
-          <LanguageMenuItem
-            key={flag.id}
-            id={flag.id}
-            onClick={handleSelectLanguage}
-          />
+          <LanguageMenuItem key={flag.id} id={flag.id} />
         ))}
       </List>
     </Paper>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, MouseEvent } from 'react';
 import useLocalStorage from '../../../../../hooks/useLocalStorage';
 import { useAppDispatch } from '../../../../../store/hooks';
 import { handleLanguage } from '../../../../../features/language';
@@ -24,8 +24,12 @@ const useLanguageMenu = () => {
   }, []);
 
   const handleSelectLanguage = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const language = event.currentTarget.id;
+    (e: MouseEvent<HTMLUListElement>) => {
+      const listItem = (e.target as HTMLElement).closest('li');
+      const language = listItem?.id as string;
+
+      if (!language) return;
+
       dispatch(handleLanguage(language));
       setSelectedLanguage(language);
       handleCloseMenu();
