@@ -3,15 +3,25 @@ import PersonalDataForm from './PersonalDataForm/PersonalDataForm';
 import TabPanel from '../Utils/TabsBox/TabPanel/TabPanel';
 import TabsBox from '../Utils/TabsBox/TabsBox';
 import useTabs from '../Utils/TabsBox/hooks/useTabs';
+import PersonalDataTable from './PersonalDataTable/PersonalDataTable';
+import { useAppSelector } from '../../store/hooks';
+import { shallowEqual } from 'react-redux';
 
-const tabLabels = [{ label: 'Data Form' }, { label: 'Data Table' }];
+// const tabLabels = [{ label: 'Data Form' }, { label: 'Data Table' }];
 
 const Home = () => {
   const { tabId, handleChangeTab } = useTabs();
+  const tabLabels = useAppSelector(
+    (state) => [
+      { label: state.language.data.dataForm.label },
+      { label: state.language.data.dataTable.label },
+    ],
+    shallowEqual,
+  );
 
   return (
     <Paper elevation={3}>
-      <Box sx={{ width: '100%' }}>
+      <Box>
         <TabsBox
           value={tabId}
           handleChange={handleChangeTab}
@@ -23,7 +33,7 @@ const Home = () => {
             <PersonalDataForm />
           </TabPanel>
           <TabPanel value={tabId} index={1}>
-            Item Two
+            <PersonalDataTable />
           </TabPanel>
         </Box>
       </Box>
