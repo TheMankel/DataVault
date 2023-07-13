@@ -6,7 +6,15 @@ interface IInputControllerProps {
   required?: boolean;
   name: string;
   label: string;
-  type?: 'text' | 'number' | 'date' | 'email';
+  type?:
+    | 'text'
+    | 'number'
+    | 'date'
+    | 'email'
+    | 'radio'
+    | 'password'
+    | 'select'
+    | 'checkbox';
   InputLabelProps?: InputLabelProps;
   multiline?: boolean;
   rows?: number;
