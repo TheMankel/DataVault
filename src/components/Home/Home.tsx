@@ -42,7 +42,7 @@ const Home = () => {
           tabLabels={tabLabels}
           ariaLabel='Data Tabs'
         />
-        <Box padding={3}>
+        <Box padding={3} mb={3}>
           <TabPanel value={tabId} index={0}>
             <PersonalDataForm />
           </TabPanel>
