@@ -4,6 +4,7 @@ import { Box, Table, TableContainer, TablePagination } from '@mui/material';
 import EnhancedTableToolbar from '../../Utils/Table/EnhancedTableToolbar/EnhancedTableToolbar';
 import EnhancedTableHead from '../../Utils/Table/EnhancedTableHead/EnhancedTableHead';
 import EnhancedTableBody from '../../Utils/Table/EnhancedTableBody/EnhancedTableBody';
+import usePersonalDataTable from './hooks/usePersonalDataTable';
 
 interface Data {
   calories: number;
@@ -44,28 +45,6 @@ const rows = [
   createData('Nougat', 360, 19.0, 9, 37.0),
   createData('Oreo', 437, 18.0, 63, 4.0),
 ];
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator<Key extends keyof any>(
-  order: 'asc' | 'desc',
-  orderBy: Key,
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string },
-) => number {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
 
 interface HeadCell {
   disablePadding: boolean;
@@ -108,53 +87,20 @@ const headCells: readonly HeadCell[] = [
 ];
 
 const PersonalDataTable = () => {
-  const [order, setOrder] = React.useState<'asc' | 'desc'>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('calories');
-  const [selected, setSelected] = React.useState<readonly string[]>([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-  const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
-    property: keyof Data,
-  ) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-  const visibleRows = React.useMemo(
-    () =>
-      rows
-        .slice()
-        .sort(getComparator(order, orderBy))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
-  );
+  const {
+    order,
+    orderBy,
+    selected,
+    setSelected,
+    page,
+    rowsPerPage,
+    emptyRows,
+    visibleRows,
+    handleRequestSort,
+    handleSelectAllClick,
+    handleChangePage,
+    handleChangeRowsPerPage,
+  } = usePersonalDataTable(rows);
 
   return (
     <Box sx={{ width: '100%' }}>
