@@ -15,12 +15,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": ["cypress", "node"],
     "paths": {
-      "@/*": ["./src/*"],
       "Assets/*": ["./src/assets/*"],
       "Components/*": ["./src/components/*"],
       "Features/*": ["./src/features/*"],
+      "Helpers/*": ["./src/helpers/*"],
       "Hooks/*": ["./src/hooks/*"],
       "Layouts/*": ["./src/layouts/*"],
       "Pages/*": ["./src/pages/*"],
@@ -29,6 +29,6 @@
       "Types/*": ["./src/types/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

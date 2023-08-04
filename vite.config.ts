@@ -7,10 +7,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      {
-        find: '@',
-        replacement: './src',
-      },
       { find: 'Assets', replacement: path.resolve(__dirname, './src/assets/') },
       {
         find: 'Components',
@@ -19,6 +15,10 @@ export default defineConfig({
       {
         find: 'Features',
         replacement: path.resolve(__dirname, './src/features/'),
+      },
+      {
+        find: 'Helpers',
+        replacement: path.resolve(__dirname, './src/helpers/'),
       },
       { find: 'Hooks', replacement: path.resolve(__dirname, './src/hooks/') },
       {
