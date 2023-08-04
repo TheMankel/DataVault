@@ -2,9 +2,9 @@ import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { nanoid } from 'nanoid';
-import { PersonalDataType } from '../../../../types/PersonalDataType';
-import PersonalDataSchema from '../../../../schemas/PersonalDataSchema';
-import { useAppSelector } from '../../../../store/hooks';
+import { PersonalDataType } from 'Types/PersonalDataType';
+import PersonalDataSchema from 'Schemas/PersonalDataSchema';
+import { useAppSelector } from 'Store/hooks';
 
 const usePersonalDataForm = () => {
   const code = useAppSelector((state) => state.language.data.code);

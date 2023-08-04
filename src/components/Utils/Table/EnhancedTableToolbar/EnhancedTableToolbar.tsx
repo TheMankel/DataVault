@@ -1,5 +1,6 @@
 import { Toolbar, Typography, Tooltip, IconButton } from '@mui/material';
-import { Delete, FilterList } from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FilterListIcon from '@mui/icons-material/FilterList';
 import { alpha } from '@mui/material/styles';
 
 interface EnhancedTableToolbarProps {
@@ -43,13 +44,13 @@ const EnhancedTableToolbar = ({
       {numSelected > 0 ? (
         <Tooltip title='Delete'>
           <IconButton>
-            <Delete />
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title='Filter list'>
           <IconButton>
-            <FilterList />
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
       )}

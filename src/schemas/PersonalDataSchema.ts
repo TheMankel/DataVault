@@ -1,5 +1,5 @@
 import { object, string, date, setLocale } from 'yup';
-import { useAppSelector } from '../store/hooks';
+import { useAppSelector } from 'Store/hooks';
 
 interface Translations {
   [locale: string]: {

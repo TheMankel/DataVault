@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import languageReducer from '../features/language';
+import languageReducer from 'Features/language';
 
 const rootReducer = combineReducers({
   language: languageReducer,

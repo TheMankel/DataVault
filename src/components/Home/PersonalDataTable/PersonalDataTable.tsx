@@ -1,9 +1,7 @@
-import React from 'react';
 import { Box, Table, TableContainer, TablePagination } from '@mui/material';
-
-import EnhancedTableToolbar from '../../Utils/Table/EnhancedTableToolbar/EnhancedTableToolbar';
-import EnhancedTableHead from '../../Utils/Table/EnhancedTableHead/EnhancedTableHead';
-import EnhancedTableBody from '../../Utils/Table/EnhancedTableBody/EnhancedTableBody';
+import EnhancedTableToolbar from 'Components/Utils/Table/EnhancedTableToolbar/EnhancedTableToolbar';
+import EnhancedTableHead from 'Components/Utils/Table/EnhancedTableHead/EnhancedTableHead';
+import EnhancedTableBody from 'Components/Utils/Table/EnhancedTableBody/EnhancedTableBody';
 import usePersonalDataTable from './hooks/usePersonalDataTable';
 
 interface Data {

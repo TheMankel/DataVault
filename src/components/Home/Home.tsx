@@ -1,12 +1,12 @@
-import { Paper, Box } from '@mui/material';
-import PersonalDataForm from './PersonalDataForm/PersonalDataForm';
-import TabPanel from '../Utils/TabsBox/TabPanel/TabPanel';
-import TabsBox from '../Utils/TabsBox/TabsBox';
-import useTabs from '../Utils/TabsBox/hooks/useTabs';
-import PersonalDataTable from './PersonalDataTable/PersonalDataTable';
-import { useAppSelector } from '../../store/hooks';
-// import { shallowEqual } from 'react-redux';
 import { useMemo } from 'react';
+import { Paper, Box } from '@mui/material';
+import TabPanel from 'Components/Utils/TabsBox/TabPanel/TabPanel';
+import TabsBox from 'Components/Utils/TabsBox/TabsBox';
+import useTabs from 'Components/Utils/TabsBox/hooks/useTabs';
+import PersonalDataForm from './PersonalDataForm/PersonalDataForm';
+import PersonalDataTable from './PersonalDataTable/PersonalDataTable';
+import { useAppSelector } from 'Store/hooks';
+// import { shallowEqual } from 'react-redux';
 
 // const tabLabels = [{ label: 'Data Form' }, { label: 'Data Table' }];
 
