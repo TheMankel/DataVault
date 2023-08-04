@@ -5,7 +5,7 @@ import DrawerMenu from './NavDrawer/NavDrawer';
 import Logo from './Logo/Logo';
 import Nav from './Nav/Nav';
 import LanguageMenu from './LanguageMenu/LanguageMenu';
-import { useAppSelector } from '../../../store/hooks';
+import { useAppSelector } from 'Store/hooks';
 
 const title = 'DataVault';
 

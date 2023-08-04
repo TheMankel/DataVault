@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, MouseEvent } from 'react';
-import useLocalStorage from '../../../../../hooks/useLocalStorage';
-import { useAppDispatch } from '../../../../../store/hooks';
-import { handleLanguage } from '../../../../../features/language';
+import useLocalStorage from 'Hooks/useLocalStorage';
+import { useAppDispatch } from 'Store/hooks';
+import { handleLanguage } from 'Features/language';
 
 const useLanguageMenu = () => {
   const dispatch = useAppDispatch();

@@ -14,8 +14,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["cypress", "node"],
+    "paths": {
+      "Assets/*": ["./src/assets/*"],
+      "Components/*": ["./src/components/*"],
+      "Features/*": ["./src/features/*"],
+      "Helpers/*": ["./src/helpers/*"],
+      "Hooks/*": ["./src/hooks/*"],
+      "Layouts/*": ["./src/layouts/*"],
+      "Pages/*": ["./src/pages/*"],
+      "Schemas/*": ["./src/schemas/*"],
+      "Store/*": ["./src/store/*"],
+      "Types/*": ["./src/types/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

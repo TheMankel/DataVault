@@ -1,4 +1,4 @@
-import Data from '../components/PersonalData/PersonalData';
+import Data from 'Components/PersonalData/PersonalData';
 
 const DataPage = () => {
   return <Data />;

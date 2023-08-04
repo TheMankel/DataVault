@@ -1,6 +1,5 @@
 import { useController, useFormContext } from 'react-hook-form';
-import { TextField } from '@mui/material';
-import { InputLabelProps } from '@mui/material';
+import { TextField, InputLabelProps } from '@mui/material';
 
 interface IInputControllerProps {
   required?: boolean;

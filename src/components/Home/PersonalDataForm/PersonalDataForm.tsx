@@ -1,8 +1,8 @@
 import { FormProvider } from 'react-hook-form';
 import { Box, Button, Grid } from '@mui/material';
 import usePersonalDataForm from './hooks/usePersonalDataForm';
-import InputController from '../../Utils/InputController/InputController';
-import { useAppSelector } from '../../../store/hooks';
+import InputController from 'Components/Utils/InputController/InputController';
+import { useAppSelector } from 'Store/hooks';
 import { shallowEqual } from 'react-redux';
 
 const PersonalDataForm = () => {
