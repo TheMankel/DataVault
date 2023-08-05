@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: CI/CD
 on: pull_request
 jobs:
   cypress-run:
