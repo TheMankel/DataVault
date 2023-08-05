@@ -10,7 +10,7 @@ const LanguageMenu = () => {
     useLanguageMenu();
 
   return (
-    <Box flex={1} display='flex' justifyContent='flex-end'>
+    <Box id='language-menu' flex={1} display='flex' justifyContent='flex-end'>
       <Box
         position='relative'
         onMouseEnter={handleOpenMenu}

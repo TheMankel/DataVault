@@ -1,38 +1,10 @@
 import { useMemo, useState } from 'react';
+import { PersonalDataType } from 'Types/PersonalDataType';
+import getComparator from 'Helpers/compare';
 
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator<Key extends keyof any>(
-  order: 'asc' | 'desc',
-  orderBy: Key,
-): (
-  a: { [key in Key]: number | string },
-  b: { [key in Key]: number | string },
-) => number {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-const usePersonalDataTable = (rows: Data[]) => {
+const usePersonalDataTable = (rows: PersonalDataType[]) => {
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Data>('calories');
+  const [orderBy, setOrderBy] = useState<keyof PersonalDataType>('id');
   const [selected, setSelected] = useState<readonly string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -51,7 +23,7 @@ const usePersonalDataTable = (rows: Data[]) => {
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof Data,
+    property: keyof PersonalDataType,
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -60,7 +32,7 @@ const usePersonalDataTable = (rows: Data[]) => {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.id);
       setSelected(newSelected);
       return;
     }

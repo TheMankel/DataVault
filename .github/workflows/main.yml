@@ -12,6 +12,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
+          component: true
           browser: chrome
           start: npx vite --host --port 3000
           wait-on: 'http://127.0.0.1:3000'

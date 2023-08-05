@@ -3,84 +3,137 @@ import EnhancedTableToolbar from 'Components/Utils/Table/EnhancedTableToolbar/En
 import EnhancedTableHead from 'Components/Utils/Table/EnhancedTableHead/EnhancedTableHead';
 import EnhancedTableBody from 'Components/Utils/Table/EnhancedTableBody/EnhancedTableBody';
 import usePersonalDataTable from './hooks/usePersonalDataTable';
-
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
+import { PersonalDataType } from 'Types/PersonalDataType';
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-): Data {
+  id: string,
+  firstname: string,
+  surname: string,
+  date_of_birth: Date,
+  about_you: string,
+): PersonalDataType {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    id,
+    firstname,
+    surname,
+    date_of_birth,
+    about_you,
   };
 }
 
 const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
+  createData(
+    '1',
+    'John',
+    'Doe',
+    new Date('1990-01-01'),
+    'I am a software engineer.',
+  ),
+  createData(
+    '2',
+    'Alice',
+    'Smith',
+    new Date('1985-05-15'),
+    'I love traveling.',
+  ),
+  createData(
+    '3',
+    'Bob',
+    'Johnson',
+    new Date('1998-11-30'),
+    'I enjoy playing guitar.',
+  ),
+  createData(
+    '4',
+    'Emily',
+    'Williams',
+    new Date('1993-08-22'),
+    'I am a bookworm.',
+  ),
+  createData('5', 'Michael', 'Brown', new Date('1976-03-10'), 'I am a chef.'),
+  createData('6', 'Sophia', 'Lee', new Date('2000-06-25'), 'I am a painter.'),
+  createData(
+    '7',
+    'William',
+    'Martin',
+    new Date('1982-09-17'),
+    'I am a nature enthusiast.',
+  ),
+  createData(
+    '8',
+    'Olivia',
+    'Taylor',
+    new Date('1995-12-05'),
+    'I love photography.',
+  ),
+  createData(
+    '9',
+    'James',
+    'Anderson',
+    new Date('1991-04-18'),
+    'I am a fitness freak.',
+  ),
+  createData(
+    '10',
+    'Emma',
+    'Clark',
+    new Date('1988-07-12'),
+    'I am a movie buff.',
+  ),
+  createData(
+    '11',
+    'Alexander',
+    'Rodriguez',
+    new Date('1997-02-08'),
+    'I am a foodie.',
+  ),
+  createData(
+    '12',
+    'Ava',
+    'White',
+    new Date('1983-10-29'),
+    'I enjoy gardening.',
+  ),
+  createData('13', 'Daniel', 'Lopez', new Date('2002-12-14'), 'I am a gamer.'),
 ];
 
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof PersonalDataType;
   label: string;
   numeric: boolean;
 }
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'name',
+    id: 'id',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: 'ID',
   },
   {
-    id: 'calories',
-    numeric: true,
+    id: 'firstname',
+    numeric: false,
     disablePadding: false,
-    label: 'Calories',
+    label: 'Firstname',
   },
   {
-    id: 'fat',
-    numeric: true,
+    id: 'surname',
+    numeric: false,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: 'Surname',
   },
   {
-    id: 'carbs',
-    numeric: true,
+    id: 'date_of_birth',
+    numeric: false,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: 'Date of birth',
   },
   {
-    id: 'protein',
-    numeric: true,
+    id: 'about_you',
+    numeric: false,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: 'About you',
   },
 ];
 

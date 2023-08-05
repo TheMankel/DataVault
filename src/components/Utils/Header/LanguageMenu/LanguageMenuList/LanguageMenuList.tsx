@@ -23,7 +23,7 @@ const LanguageMenuList = <T extends { id: string }>({
         width: '100%',
         zIndex: 1300,
       }}>
-      <List onClick={handleSelectLanguage}>
+      <List id='language-list' onClick={handleSelectLanguage}>
         {languagesFlags.map((flag) => (
           <LanguageMenuItem key={flag.id} id={flag.id} />
         ))}
