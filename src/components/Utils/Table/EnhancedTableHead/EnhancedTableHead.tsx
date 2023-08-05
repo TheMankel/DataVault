@@ -8,18 +8,19 @@ import {
   TableSortLabel,
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
+import { PersonalDataType } from 'Types/PersonalDataType';
 
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
+// interface Data {
+//   calories: number;
+//   carbs: number;
+//   fat: number;
+//   name: string;
+//   protein: number;
+// }
 
 interface HeadCell {
   disablePadding: boolean;
-  id: keyof Data;
+  id: keyof PersonalDataType;
   label: string;
   numeric: boolean;
 }
@@ -29,7 +30,7 @@ interface EnhancedTableProps {
   numSelected: number;
   onRequestSort: (
     event: React.MouseEvent<unknown>,
-    property: keyof Data,
+    property: keyof PersonalDataType,
   ) => void;
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   order: 'asc' | 'desc';
@@ -47,7 +48,8 @@ const EnhancedTableHead = ({
   onRequestSort,
 }: EnhancedTableProps) => {
   const createSortHandler =
-    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof PersonalDataType) =>
+    (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property);
     };
 
