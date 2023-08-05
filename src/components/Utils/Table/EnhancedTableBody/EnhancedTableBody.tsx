@@ -1,16 +1,19 @@
 import { TableBody, TableRow, TableCell, Checkbox } from '@mui/material';
+import { PersonalDataType } from 'Types/PersonalDataType';
+import dateFormat from 'Helpers/dateFormat';
+import stringFormat from 'Helpers/stringFormat';
 
-interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
-}
+// interface Data {
+//   calories: number;
+//   carbs: number;
+//   fat: number;
+//   name: string;
+//   protein: number;
+// }
 
 interface EnhancedTableBodyProps {
   emptyRows: number;
-  visibleRows: Data[];
+  visibleRows: PersonalDataType[];
   selected: readonly string[];
   handleSelected: React.Dispatch<React.SetStateAction<readonly string[]>>;
 }
@@ -46,17 +49,17 @@ const EnhancedTableBody = ({
   return (
     <TableBody>
       {visibleRows.map((row, index) => {
-        const isItemSelected = isSelected(row.name);
+        const isItemSelected = isSelected(row.id);
         const labelId = `enhanced-table-checkbox-${index}`;
 
         return (
           <TableRow
             hover
-            onClick={(event) => handleClick(event, row.name)}
+            onClick={(event) => handleClick(event, row.id)}
             role='checkbox'
             aria-checked={isItemSelected}
             tabIndex={-1}
-            key={row.name}
+            key={row.id}
             selected={isItemSelected}
             sx={{ cursor: 'pointer' }}>
             <TableCell padding='checkbox'>
@@ -69,12 +72,12 @@ const EnhancedTableBody = ({
               />
             </TableCell>
             <TableCell component='th' id={labelId} scope='row' padding='none'>
-              {row.name}
+              {row.id}
             </TableCell>
-            <TableCell align='right'>{row.calories}</TableCell>
-            <TableCell align='right'>{row.fat}</TableCell>
-            <TableCell align='right'>{row.carbs}</TableCell>
-            <TableCell align='right'>{row.protein}</TableCell>
+            <TableCell>{row.firstname}</TableCell>
+            <TableCell>{row.surname}</TableCell>
+            <TableCell>{dateFormat(row.date_of_birth)}</TableCell>
+            <TableCell>{stringFormat(row.about_you)}</TableCell>
           </TableRow>
         );
       })}
