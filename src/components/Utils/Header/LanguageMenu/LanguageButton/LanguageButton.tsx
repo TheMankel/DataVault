@@ -12,10 +12,14 @@ const LanguageButton = ({ open }: ILanguageButtonProps) => {
 
   return (
     <Button
+      id='language-selector'
       variant='outlined'
       endIcon={open ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
       sx={{ width: '80px', justifyContent: 'space-between' }}>
-      <Typography component='span' sx={{ width: '100%' }}>
+      <Typography
+        id='selected-language'
+        component='span'
+        sx={{ width: '100%' }}>
         {selectedLanguage}
       </Typography>
     </Button>
