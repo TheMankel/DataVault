@@ -1,4 +1,4 @@
-name: CI/CD
+name: Cypress Tests
 on: pull_request
 jobs:
   cypress-run:
@@ -18,12 +18,5 @@ jobs:
           browser: chrome
           start: npx vite --host --port 3000
           wait-on: 'http://127.0.0.1:3000'
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=build --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+      
 
