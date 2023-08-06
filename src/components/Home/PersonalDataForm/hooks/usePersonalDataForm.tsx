@@ -4,10 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { nanoid } from 'nanoid';
 import { PersonalDataType } from 'Types/PersonalDataType';
 import PersonalDataSchema from 'Schemas/PersonalDataSchema';
-import { useAppSelector } from 'Store/hooks';
+import { useAppSelector, useAppDispatch } from 'Store/hooks';
+import { addVaultData } from 'Features/vaultData';
 
 const usePersonalDataForm = () => {
-  const code = useAppSelector((state) => state.language.data.code);
+  const code = useAppSelector((state) => state.language.code);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     methods.clearErrors();
   }, [code]);
@@ -39,7 +42,16 @@ const usePersonalDataForm = () => {
       date_of_birth,
       about_you,
     }: PersonalDataType) => {
-      console.log(id, firstname, surname, date_of_birth, about_you);
+      const data = {
+        id,
+        firstname,
+        surname,
+        date_of_birth: date_of_birth.toISOString(),
+        about_you,
+      };
+      console.log(data);
+      dispatch(addVaultData(data));
+      methods.reset();
     },
     [],
   );
