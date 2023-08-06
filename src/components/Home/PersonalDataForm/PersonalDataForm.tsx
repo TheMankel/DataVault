@@ -9,8 +9,8 @@ const PersonalDataForm = () => {
   const { methods, handleFormCancel, handleFormSubmit } = usePersonalDataForm();
   const { dataForm, actionButtons } = useAppSelector(
     (state) => ({
-      dataForm: state.language.data.dataForm,
-      actionButtons: state.language.data.actionButtons,
+      dataForm: state.language.dataForm,
+      actionButtons: state.language.actionButtons,
     }),
     shallowEqual,
   );

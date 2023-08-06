@@ -21,11 +21,11 @@ const Home = () => {
   // );
 
   const dataFormLabel = useAppSelector(
-    (state) => state.language.data.dataForm.label,
+    (state) => state.language.dataForm.label,
   );
 
   const dataTableLabel = useAppSelector(
-    (state) => state.language.data.dataTable.label,
+    (state) => state.language.dataTable.label,
   );
 
   const tabLabels = useMemo(

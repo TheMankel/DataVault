@@ -30,7 +30,7 @@ const setTranslations = (locale: string) => {
 };
 
 const PersonalDataSchema = () => {
-  const errors = useAppSelector((state) => state.language.data.errors);
+  const errors = useAppSelector((state) => state.language.errors);
 
   return object().shape({
     id: string().trim().required('ID is required'),

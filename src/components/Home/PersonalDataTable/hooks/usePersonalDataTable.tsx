@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
-import { PersonalDataType } from 'Types/PersonalDataType';
+import { VaultData } from 'Types/PersonalDataType';
 import getComparator from 'Helpers/compare';
 
-const usePersonalDataTable = (rows: PersonalDataType[]) => {
+const usePersonalDataTable = (rows: VaultData[]) => {
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
-  const [orderBy, setOrderBy] = useState<keyof PersonalDataType>('id');
+  const [orderBy, setOrderBy] = useState<keyof VaultData>('id');
   const [selected, setSelected] = useState<readonly string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -23,7 +23,7 @@ const usePersonalDataTable = (rows: PersonalDataType[]) => {
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof PersonalDataType,
+    property: keyof VaultData,
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');

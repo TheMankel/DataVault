@@ -8,7 +8,7 @@ interface ILanguageButtonProps {
 }
 
 const LanguageButton = ({ open }: ILanguageButtonProps) => {
-  const selectedLanguage = useAppSelector((state) => state.language.data.code);
+  const selectedLanguage = useAppSelector((state) => state.language.code);
 
   return (
     <Button

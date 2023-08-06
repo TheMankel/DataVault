@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import languageReducer from 'Features/language';
+import vaultDataReducer from 'Features/vaultData';
 
 const rootReducer = combineReducers({
   language: languageReducer,
+  vault: vaultDataReducer,
 });
 
 export const store = configureStore({

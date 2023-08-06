@@ -1,19 +1,10 @@
 import { TableBody, TableRow, TableCell, Checkbox } from '@mui/material';
-import { PersonalDataType } from 'Types/PersonalDataType';
-import dateFormat from 'Helpers/dateFormat';
+import { VaultData } from 'Types/PersonalDataType';
 import stringFormat from 'Helpers/stringFormat';
-
-// interface Data {
-//   calories: number;
-//   carbs: number;
-//   fat: number;
-//   name: string;
-//   protein: number;
-// }
 
 interface EnhancedTableBodyProps {
   emptyRows: number;
-  visibleRows: PersonalDataType[];
+  visibleRows: VaultData[];
   selected: readonly string[];
   handleSelected: React.Dispatch<React.SetStateAction<readonly string[]>>;
 }
@@ -72,11 +63,11 @@ const EnhancedTableBody = ({
               />
             </TableCell>
             <TableCell component='th' id={labelId} scope='row' padding='none'>
-              {row.id}
+              {stringFormat(row.id)}
             </TableCell>
             <TableCell>{row.firstname}</TableCell>
             <TableCell>{row.surname}</TableCell>
-            <TableCell>{dateFormat(row.date_of_birth)}</TableCell>
+            <TableCell>{row.date_of_birth.substring(0, 10)}</TableCell>
             <TableCell>{stringFormat(row.about_you)}</TableCell>
           </TableRow>
         );
