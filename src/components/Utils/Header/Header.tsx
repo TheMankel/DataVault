@@ -12,7 +12,7 @@ const title = 'DataVault';
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const showComponents = useMediaQuery('(min-width:900px)');
-  const urls = useAppSelector((state) => state.language.data.urls);
+  const urls = useAppSelector((state) => state.language.urls);
 
   const pagesUrls = [
     { name: urls.main, url: '/' },

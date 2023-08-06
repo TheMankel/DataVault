@@ -73,19 +73,18 @@ const languageValues: ILanguage = {
 };
 
 const initialState = {
-  data: languageValues.PL,
+  ...languageValues.PL,
 };
 
 const languageSlice = createSlice({
   name: 'language',
   initialState,
   reducers: {
-    handleLanguage: (state, action: PayloadAction<string>) => {
+    handleLanguage: (_, action: PayloadAction<string>) => {
       const languageCode = action.payload;
       const language = languageValues[languageCode];
-      if (language) {
-        state.data = language;
-      } else {
+      if (language) return language;
+      else {
         throw new Error('Selected language is not supported');
       }
     },
