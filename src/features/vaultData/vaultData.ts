@@ -10,9 +10,9 @@ const vaultDataSlice = createSlice({
     addVaultData: (state, action: PayloadAction<VaultData>) => {
       state.push(action.payload);
     },
-    removeVaultData: (state, action: PayloadAction<string>) => {
-      const idToRemove = action.payload;
-      return state.filter((data) => data.id !== idToRemove);
+    removeVaultData: (state, action: PayloadAction<readonly string[]>) => {
+      const arrayOfIdToRemove = action.payload;
+      return state.filter((data) => !arrayOfIdToRemove.includes(data.id));
     },
   },
 });
