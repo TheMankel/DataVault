@@ -1,4 +1,5 @@
-import { TableBody, TableRow, TableCell, Checkbox } from '@mui/material';
+import { TableBody, TableRow, TableCell, Checkbox, Box } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { VaultData } from 'Types/PersonalDataType';
 import stringFormat from 'Helpers/stringFormat';
 
@@ -37,6 +38,26 @@ const EnhancedTableBody = ({
     handleSelected(newSelected);
   };
 
+  console.log(visibleRows);
+
+  if (!visibleRows.length)
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell id='no-data' colSpan={6} align='center'>
+            <Box
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              gap={1}>
+              <InfoOutlinedIcon />
+              No records found
+            </Box>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    );
+
   return (
     <TableBody>
       {visibleRows.map((row, index) => {
@@ -53,7 +74,11 @@ const EnhancedTableBody = ({
             key={row.id}
             selected={isItemSelected}
             sx={{ cursor: 'pointer' }}>
-            <TableCell padding='checkbox'>
+            <TableCell
+              component='th'
+              id={labelId}
+              scope='row'
+              padding='checkbox'>
               <Checkbox
                 color='primary'
                 checked={isItemSelected}
@@ -62,13 +87,15 @@ const EnhancedTableBody = ({
                 }}
               />
             </TableCell>
-            <TableCell component='th' id={labelId} scope='row' padding='none'>
+            <TableCell id='id' padding='none'>
               {stringFormat(row.id)}
             </TableCell>
-            <TableCell>{row.firstname}</TableCell>
-            <TableCell>{row.surname}</TableCell>
-            <TableCell>{row.date_of_birth.substring(0, 10)}</TableCell>
-            <TableCell>{stringFormat(row.about_you)}</TableCell>
+            <TableCell id='firstname'>{row.firstname}</TableCell>
+            <TableCell id='surname'>{row.surname}</TableCell>
+            <TableCell id='date_of_birth'>
+              {row.date_of_birth.substring(0, 10)}
+            </TableCell>
+            <TableCell id='about_you'>{stringFormat(row.about_you)}</TableCell>
           </TableRow>
         );
       })}

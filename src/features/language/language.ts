@@ -31,7 +31,7 @@ const languageValues: ILanguage = {
     code: 'PL',
     urls: { main: 'Start', data: 'Dane' },
     dataForm: {
-      label: 'Formularz na Dane',
+      label: 'Formularz na dane',
       firstname: 'Imię',
       surname: 'Nazwisko',
       date_of_birth: 'Data Urodzenia',

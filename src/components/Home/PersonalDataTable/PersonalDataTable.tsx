@@ -171,13 +171,16 @@ const PersonalDataTable = () => {
     handleSelectAllClick,
     handleChangePage,
     handleChangeRowsPerPage,
+    handleDelete,
   } = usePersonalDataTable(people);
-
-  if (!people.length) return null;
 
   return (
     <Box sx={{ width: '100%' }}>
-      <EnhancedTableToolbar label='Vault Data' numSelected={selected.length} />
+      <EnhancedTableToolbar
+        label='Vault Data'
+        numSelected={selected.length}
+        handleDelete={handleDelete}
+      />
       <TableContainer>
         <Table
           sx={{ minWidth: 750, maxHeight: 1000 }}
