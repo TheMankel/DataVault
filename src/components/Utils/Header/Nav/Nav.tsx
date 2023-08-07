@@ -74,7 +74,7 @@ const Nav = <T extends { name: string; url: string }>({
   });
 
   return (
-    <Box component='nav' sx={sx}>
+    <Box id='nav' component='nav' sx={sx}>
       <List disablePadding {...rest}>
         {linkElements}
       </List>

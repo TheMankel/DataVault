@@ -18,6 +18,7 @@ const PersonalDataForm = () => {
   return (
     <FormProvider {...methods}>
       <Box
+        id='data-form'
         component='form'
         onSubmit={methods.handleSubmit(handleFormSubmit)}
         noValidate>
