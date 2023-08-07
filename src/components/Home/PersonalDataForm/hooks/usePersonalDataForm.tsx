@@ -6,6 +6,7 @@ import { PersonalDataType } from 'Types/PersonalDataType';
 import PersonalDataSchema from 'Schemas/PersonalDataSchema';
 import { useAppSelector, useAppDispatch } from 'Store/hooks';
 import { addVaultData } from 'Features/vaultData';
+import dayjs from 'dayjs';
 
 const usePersonalDataForm = () => {
   const code = useAppSelector((state) => state.language.code);
@@ -19,9 +20,9 @@ const usePersonalDataForm = () => {
     id: nanoid(),
     firstname: '',
     surname: '',
-    date_of_birth: new Date(Date.UTC(new Date().getFullYear(), 0, 1))
-      .toISOString()
-      .substring(0, 10) as unknown as Date,
+    date_of_birth: dayjs(`${dayjs().format('YYYY')}-01-01`).format(
+      'YYYY-MM-DD',
+    ) as unknown as Date,
     about_you: '',
   };
   const methods = useForm<PersonalDataType>({
@@ -35,18 +36,12 @@ const usePersonalDataForm = () => {
   }, []);
 
   const handleFormSubmit = useCallback(
-    ({
-      id,
-      firstname,
-      surname,
-      date_of_birth,
-      about_you,
-    }: PersonalDataType) => {
+    ({ firstname, surname, date_of_birth, about_you }: PersonalDataType) => {
       const data = {
-        id,
+        id: nanoid(),
         firstname,
         surname,
-        date_of_birth: date_of_birth.toISOString(),
+        date_of_birth: dayjs(date_of_birth).format('YYYY-MM-DD'),
         about_you,
       };
       console.log(data);
