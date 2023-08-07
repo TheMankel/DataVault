@@ -1,8 +1,11 @@
 import { useMemo, useState } from 'react';
 import { VaultData } from 'Types/PersonalDataType';
 import getComparator from 'Helpers/compare';
+import { useAppDispatch } from 'Store/hooks';
+import { removeVaultData } from 'Features/vaultData';
 
 const usePersonalDataTable = (rows: VaultData[]) => {
+  const dispatch = useAppDispatch();
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [orderBy, setOrderBy] = useState<keyof VaultData>('id');
   const [selected, setSelected] = useState<readonly string[]>([]);
@@ -18,7 +21,7 @@ const usePersonalDataTable = (rows: VaultData[]) => {
         .slice()
         .sort(getComparator(order, orderBy))
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-    [order, orderBy, page, rowsPerPage],
+    [order, orderBy, page, rowsPerPage, rows],
   );
 
   const handleRequestSort = (
@@ -50,6 +53,12 @@ const usePersonalDataTable = (rows: VaultData[]) => {
     setPage(0);
   };
 
+  const handleDelete = () => {
+    console.log(selected);
+    dispatch(removeVaultData(selected));
+    setSelected([]);
+  };
+
   return {
     order,
     orderBy,
@@ -63,6 +72,7 @@ const usePersonalDataTable = (rows: VaultData[]) => {
     handleSelectAllClick,
     handleChangePage,
     handleChangeRowsPerPage,
+    handleDelete,
   };
 };
 
