@@ -1,5 +1,6 @@
 import { Box, TableCell, TableSortLabel } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
+import { MouseEvent } from 'react';
 
 interface IHeadCellProps {
   disablePadding: boolean;
@@ -8,7 +9,7 @@ interface IHeadCellProps {
   numeric: boolean;
   order?: 'asc' | 'desc';
   orderBy: string;
-  handleSort: (e: React.MouseEvent<HTMLSpanElement>) => void;
+  handleSort: (property: string) => (event: MouseEvent<unknown>) => void;
 }
 
 const TableHeadCell = ({
@@ -22,21 +23,20 @@ const TableHeadCell = ({
 }: IHeadCellProps) => {
   return (
     <TableCell
-      key={id}
+      id={id}
       align={numeric ? 'right' : 'left'}
       padding={disablePadding ? 'none' : 'normal'}
       sortDirection={orderBy === id ? order : false}>
       <TableSortLabel
-        id={id}
         active={orderBy === id}
         direction={orderBy === id ? order : 'asc'}
-        onClick={handleSort}>
+        onClick={handleSort(id)}>
         {label}
-        {orderBy === id && (
+        {orderBy === id ? (
           <Box component='span' sx={visuallyHidden}>
             {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
           </Box>
-        )}
+        ) : null}
       </TableSortLabel>
     </TableCell>
   );
