@@ -7,7 +7,7 @@ import { removeVaultData } from 'Features/vaultData';
 const usePersonalDataTable = (rows: VaultData[]) => {
   const dispatch = useAppDispatch();
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
-  const [orderBy, setOrderBy] = useState<keyof VaultData>('id');
+  const [orderBy, setOrderBy] = useState<string>('id');
   const [selected, setSelected] = useState<readonly string[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -26,7 +26,7 @@ const usePersonalDataTable = (rows: VaultData[]) => {
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
-    property: keyof VaultData,
+    property: string,
   ) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
