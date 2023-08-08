@@ -2,6 +2,7 @@ import { Toolbar, Typography, Tooltip, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { alpha } from '@mui/material/styles';
+import { useAppSelector } from 'Store/hooks';
 
 interface EnhancedTableToolbarProps {
   label: string;
@@ -13,6 +14,10 @@ const EnhancedTableToolbar = ({
   numSelected,
   handleDelete,
 }: EnhancedTableToolbarProps) => {
+  const toolbarActions = useAppSelector(
+    (state) => state.language.dataTable.toolbar,
+  );
+
   return (
     <Toolbar
       sx={{
@@ -44,13 +49,13 @@ const EnhancedTableToolbar = ({
         </Typography>
       )}
       {numSelected > 0 ? (
-        <Tooltip title='Delete'>
+        <Tooltip title={toolbarActions.delete}>
           <IconButton onClick={handleDelete}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title='Filter list'>
+        <Tooltip title={toolbarActions.filter}>
           <IconButton>
             <FilterListIcon />
           </IconButton>
