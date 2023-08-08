@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { VaultData } from 'Types/PersonalDataType';
 
 interface ILanguage {
   [key: string]: {
@@ -14,6 +15,15 @@ interface ILanguage {
     };
     dataTable: {
       label: string;
+      tableHeads: VaultData;
+      data_title: string;
+      message: string;
+      selected: string;
+      rows_per_page: string;
+      toolbar: {
+        delete: string;
+        filter: string;
+      };
     };
     actionButtons: {
       cancel: string;
@@ -39,6 +49,18 @@ const languageValues: ILanguage = {
     },
     dataTable: {
       label: 'Tabela z danymi',
+      tableHeads: {
+        id: 'ID',
+        firstname: 'Imię',
+        surname: 'Nazwisko',
+        date_of_birth: 'Data urodzenia',
+        about_you: 'O tobie',
+      },
+      data_title: 'Dane osobowe',
+      message: 'Nie znaleziono danych',
+      selected: 'wybrano',
+      rows_per_page: 'Wiersze na stronę',
+      toolbar: { delete: 'Usuń', filter: 'Filtruj' },
     },
     actionButtons: {
       cancel: 'Anuluj',
@@ -61,6 +83,18 @@ const languageValues: ILanguage = {
     },
     dataTable: {
       label: 'Data Table',
+      tableHeads: {
+        id: 'ID',
+        firstname: 'Firstname',
+        surname: 'Surname',
+        date_of_birth: 'Date of birth',
+        about_you: 'About you',
+      },
+      data_title: 'Personal data',
+      message: 'No records found',
+      selected: 'selected',
+      rows_per_page: 'Rows per page',
+      toolbar: { delete: 'Delete', filter: 'Filter' },
     },
     actionButtons: {
       cancel: 'Cancel',
