@@ -123,41 +123,17 @@ interface HeadCell {
   numeric: boolean;
 }
 
-const headCells: readonly HeadCell[] = [
-  {
-    id: 'id',
-    numeric: false,
-    disablePadding: true,
-    label: 'ID',
-  },
-  {
-    id: 'firstname',
-    numeric: false,
-    disablePadding: false,
-    label: 'Firstname',
-  },
-  {
-    id: 'surname',
-    numeric: false,
-    disablePadding: false,
-    label: 'Surname',
-  },
-  {
-    id: 'date_of_birth',
-    numeric: false,
-    disablePadding: false,
-    label: 'Date of birth',
-  },
-  {
-    id: 'about_you',
-    numeric: false,
-    disablePadding: false,
-    label: 'About you',
-  },
-];
-
 const PersonalDataTable = () => {
   const people = useAppSelector((state) => state.vault);
+  const tableHeads = useAppSelector(
+    (state) => state.language.dataTable.tableHeads,
+  );
+  const dataTitle = useAppSelector(
+    (state) => state.language.dataTable.data_title,
+  );
+  const rowsPerPageLabel = useAppSelector(
+    (state) => state.language.dataTable.rows_per_page,
+  );
   const {
     order,
     orderBy,
@@ -174,10 +150,19 @@ const PersonalDataTable = () => {
     handleDelete,
   } = usePersonalDataTable(people);
 
+  const headCells: readonly HeadCell[] = Object.keys(tableHeads).map((head) => {
+    return {
+      id: head as keyof VaultData,
+      numeric: false,
+      disablePadding: head === 'id' ? true : false,
+      label: tableHeads[head as keyof VaultData],
+    };
+  });
+
   return (
     <Box sx={{ width: '100%' }}>
       <EnhancedTableToolbar
-        label='Vault Data'
+        label={dataTitle}
         numSelected={selected.length}
         handleDelete={handleDelete}
       />
@@ -207,6 +192,7 @@ const PersonalDataTable = () => {
         component='div'
         count={people.length}
         rowsPerPage={rowsPerPage}
+        labelRowsPerPage={rowsPerPageLabel}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
