@@ -1,24 +1,26 @@
-import { TableBody, TableRow, TableCell, Checkbox, Box } from '@mui/material';
+import { Dispatch, SetStateAction } from 'react';
+import { TableBody, TableRow, TableCell, Box } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { VaultData } from 'Types/PersonalDataType';
-import stringFormat from 'Helpers/stringFormat';
+import EnhancedTableRow from '../EnhancedTableRow/EnhancedTableRow';
+import { useAppSelector } from 'Store/hooks';
 
-interface EnhancedTableBodyProps {
+interface EnhancedTableBodyProps<T> {
   emptyRows: number;
-  visibleRows: VaultData[];
+  visibleRows: T[];
   selected: readonly string[];
-  handleSelected: React.Dispatch<React.SetStateAction<readonly string[]>>;
+  handleSelected: Dispatch<SetStateAction<readonly string[]>>;
 }
 
-const EnhancedTableBody = ({
+const EnhancedTableBody = <T extends { id: string }>({
   emptyRows,
   visibleRows,
   selected,
   handleSelected,
-}: EnhancedTableBodyProps) => {
+}: EnhancedTableBodyProps<T>) => {
+  const message = useAppSelector((state) => state.language.dataTable.message);
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+  const handleClick = (name: string) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: readonly string[] = [];
 
@@ -38,8 +40,6 @@ const EnhancedTableBody = ({
     handleSelected(newSelected);
   };
 
-  console.log(visibleRows);
-
   if (!visibleRows.length)
     return (
       <TableBody>
@@ -51,7 +51,7 @@ const EnhancedTableBody = ({
               alignItems='center'
               gap={1}>
               <InfoOutlinedIcon />
-              No records found
+              {message}
             </Box>
           </TableCell>
         </TableRow>
@@ -65,38 +65,13 @@ const EnhancedTableBody = ({
         const labelId = `enhanced-table-checkbox-${index}`;
 
         return (
-          <TableRow
-            hover
-            onClick={(event) => handleClick(event, row.id)}
-            role='checkbox'
-            aria-checked={isItemSelected}
-            tabIndex={-1}
+          <EnhancedTableRow
             key={row.id}
-            selected={isItemSelected}
-            sx={{ cursor: 'pointer' }}>
-            <TableCell
-              component='th'
-              id={labelId}
-              scope='row'
-              padding='checkbox'>
-              <Checkbox
-                color='primary'
-                checked={isItemSelected}
-                inputProps={{
-                  'aria-labelledby': labelId,
-                }}
-              />
-            </TableCell>
-            <TableCell id='id' padding='none'>
-              {stringFormat(row.id)}
-            </TableCell>
-            <TableCell id='firstname'>{row.firstname}</TableCell>
-            <TableCell id='surname'>{row.surname}</TableCell>
-            <TableCell id='date_of_birth'>
-              {row.date_of_birth.substring(0, 10)}
-            </TableCell>
-            <TableCell id='about_you'>{stringFormat(row.about_you)}</TableCell>
-          </TableRow>
+            row={row}
+            isSelected={isItemSelected}
+            labelId={labelId}
+            handleClick={() => handleClick(row.id)}
+          />
         );
       })}
       {emptyRows > 0 && (
