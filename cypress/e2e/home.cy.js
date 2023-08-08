@@ -122,8 +122,11 @@ describe('home page', () => {
       cy.get('tbody').should('exist');
       cy.get('tbody tr').should('have.length.at.least', 1);
       cy.get('tbody tr>th input[type="checkbox"]').check().should('be.checked');
-      cy.get('button[aria-label="Delete"]').should('exist').click();
-      cy.get('tbody tr>td#no-data').should('have.text', 'No records found');
+      cy.get('button[aria-label="Usuń"]').should('exist').click();
+      cy.get('tbody tr>td#no-data').should(
+        'have.text',
+        'Nie znaleziono danych',
+      );
     });
   });
 });
