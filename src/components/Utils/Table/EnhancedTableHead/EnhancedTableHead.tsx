@@ -1,4 +1,4 @@
-import { MouseEvent, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { TableHead, TableRow, TableCell, Checkbox } from '@mui/material';
 import TableHeadCell from '../TableHeadCell/TableHeadCell';
 
@@ -12,7 +12,7 @@ interface HeadCell {
 interface EnhancedTableProps {
   headCells: readonly HeadCell[];
   numSelected: number;
-  onRequestSort: (event: MouseEvent<unknown>, property: string) => void;
+  onRequestSort: (property: string) => void;
   onSelectAllClick: (event: ChangeEvent<HTMLInputElement>) => void;
   order: 'asc' | 'desc';
   orderBy: string;
@@ -28,10 +28,9 @@ const EnhancedTableHead = ({
   rowCount,
   onRequestSort,
 }: EnhancedTableProps) => {
-  const createSortHandler =
-    (property: string) => (event: MouseEvent<unknown>) => {
-      onRequestSort(event, property);
-    };
+  const createSortHandler = (property: string) => {
+    onRequestSort(property);
+  };
 
   return (
     <TableHead>
