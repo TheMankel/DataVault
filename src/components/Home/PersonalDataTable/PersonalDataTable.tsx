@@ -1,10 +1,17 @@
-import { Box, Table, TableContainer, TablePagination } from '@mui/material';
+import {
+  Box,
+  Table,
+  TableContainer,
+  TablePagination,
+  useMediaQuery,
+} from '@mui/material';
 import EnhancedTableToolbar from 'Components/Utils/Table/EnhancedTableToolbar/EnhancedTableToolbar';
 import EnhancedTableHead from 'Components/Utils/Table/EnhancedTableHead/EnhancedTableHead';
 import EnhancedTableBody from 'Components/Utils/Table/EnhancedTableBody/EnhancedTableBody';
 import usePersonalDataTable from './hooks/usePersonalDataTable';
 import { VaultData } from 'Types/PersonalDataType';
 import { useAppSelector } from 'Store/hooks';
+import EnhancedFiltering from 'Components/Utils/Table/EnhancedFiltering/EnhancedFiltering';
 
 // function createData(
 //   id: string,
@@ -124,7 +131,7 @@ interface HeadCell {
 }
 
 const PersonalDataTable = () => {
-  const people = useAppSelector((state) => state.vault);
+  const matches = useMediaQuery('(min-width:400px)');
   const tableHeads = useAppSelector(
     (state) => state.language.dataTable.tableHeads,
   );
@@ -148,7 +155,16 @@ const PersonalDataTable = () => {
     handleChangePage,
     handleChangeRowsPerPage,
     handleDelete,
-  } = usePersonalDataTable(people);
+    openFilter,
+    anchorFilterEl,
+    handleOpenFilter,
+    handleCloseFilter,
+    selectedFilterCol,
+    filterValue,
+    handleFilter,
+    handleSelectFilterCol,
+    handleEdit,
+  } = usePersonalDataTable();
 
   const headCells: readonly HeadCell[] = Object.keys(tableHeads).map((head) => {
     return {
@@ -160,15 +176,29 @@ const PersonalDataTable = () => {
   });
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box
+      sx={{
+        width: '100%',
+        border: '1px solid',
+        borderColor: 'divider',
+        borderRadius: 1,
+      }}>
       <EnhancedTableToolbar
         label={dataTitle}
         numSelected={selected.length}
+        filterValue={filterValue}
         handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        handleOpenFilter={handleOpenFilter}
       />
       <TableContainer>
         <Table
-          sx={{ minWidth: 750, maxHeight: 1000 }}
+          sx={{
+            minWidth: 750,
+            maxHeight: 1000,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
           aria-labelledby='VaultTable'>
           <EnhancedTableHead
             headCells={headCells}
@@ -177,22 +207,32 @@ const PersonalDataTable = () => {
             orderBy={orderBy}
             onSelectAllClick={handleSelectAllClick}
             onRequestSort={handleRequestSort}
-            rowCount={people.length}
+            rowCount={visibleRows.length}
           />
           <EnhancedTableBody
             emptyRows={emptyRows}
             visibleRows={visibleRows}
             selected={selected}
             handleSelected={setSelected}
+            anchorFilterEl={anchorFilterEl}
           />
         </Table>
       </TableContainer>
+      <EnhancedFiltering
+        open={openFilter}
+        anchorEl={anchorFilterEl}
+        onClose={handleCloseFilter}
+        selectedFilterCol={selectedFilterCol}
+        filterValue={filterValue}
+        handleFilter={handleFilter}
+        handleSelectFilterCol={handleSelectFilterCol}
+      />
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component='div'
-        count={people.length}
+        count={visibleRows.length}
         rowsPerPage={rowsPerPage}
-        labelRowsPerPage={rowsPerPageLabel}
+        labelRowsPerPage={matches && rowsPerPageLabel}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
