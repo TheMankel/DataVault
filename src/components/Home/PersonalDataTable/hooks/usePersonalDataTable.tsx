@@ -1,4 +1,11 @@
-import { useMemo, useState, useRef, MouseEvent, ChangeEvent } from 'react';
+import {
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  MouseEvent,
+  ChangeEvent,
+} from 'react';
 import { VaultData } from 'Types/PersonalDataType';
 import getComparator from 'Helpers/compare';
 import { useAppSelector, useAppDispatch } from 'Store/hooks';
@@ -29,6 +36,10 @@ const usePersonalDataTable = () => {
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [order, orderBy, page, rowsPerPage, vaultData],
   );
+
+  useEffect(() => {
+    setVaultData(people);
+  }, [people]);
 
   const handleRequestSort = (property: string) => {
     const isAsc = orderBy === property && order === 'asc';
