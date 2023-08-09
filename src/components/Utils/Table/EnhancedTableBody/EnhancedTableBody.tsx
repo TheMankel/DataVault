@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, MutableRefObject, ChangeEvent } from 'react';
 import { TableBody, TableRow, TableCell, Box } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import EnhancedTableRow from '../EnhancedTableRow/EnhancedTableRow';
@@ -9,6 +9,7 @@ interface EnhancedTableBodyProps<T> {
   visibleRows: T[];
   selected: readonly string[];
   handleSelected: Dispatch<SetStateAction<readonly string[]>>;
+  anchorFilterEl: MutableRefObject<HTMLTableSectionElement | null>;
 }
 
 const EnhancedTableBody = <T extends { id: string }>({
@@ -16,6 +17,7 @@ const EnhancedTableBody = <T extends { id: string }>({
   visibleRows,
   selected,
   handleSelected,
+  anchorFilterEl,
 }: EnhancedTableBodyProps<T>) => {
   const message = useAppSelector((state) => state.language.dataTable.message);
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
@@ -42,7 +44,7 @@ const EnhancedTableBody = <T extends { id: string }>({
 
   if (!visibleRows.length)
     return (
-      <TableBody>
+      <TableBody ref={anchorFilterEl}>
         <TableRow>
           <TableCell id='no-data' colSpan={6} align='center'>
             <Box
@@ -50,7 +52,7 @@ const EnhancedTableBody = <T extends { id: string }>({
               justifyContent='center'
               alignItems='center'
               gap={1}>
-              <InfoOutlinedIcon />
+              <InfoOutlinedIcon fontSize='small' />
               {message}
             </Box>
           </TableCell>
@@ -59,30 +61,32 @@ const EnhancedTableBody = <T extends { id: string }>({
     );
 
   return (
-    <TableBody>
-      {visibleRows.map((row, index) => {
-        const isItemSelected = isSelected(row.id);
-        const labelId = `enhanced-table-checkbox-${index}`;
+    <>
+      <TableBody ref={anchorFilterEl}>
+        {visibleRows.map((row, index) => {
+          const isItemSelected = isSelected(row.id);
+          const labelId = `checkbox-${index}`;
 
-        return (
-          <EnhancedTableRow
-            key={row.id}
-            row={row}
-            isSelected={isItemSelected}
-            labelId={labelId}
-            handleClick={() => handleClick(row.id)}
-          />
-        );
-      })}
-      {emptyRows > 0 && (
-        <TableRow
-          style={{
-            height: 53 * emptyRows,
-          }}>
-          <TableCell colSpan={6} />
-        </TableRow>
-      )}
-    </TableBody>
+          return (
+            <EnhancedTableRow
+              key={row.id}
+              row={row}
+              isSelected={isItemSelected}
+              labelId={labelId}
+              handleClick={() => handleClick(row.id)}
+            />
+          );
+        })}
+        {emptyRows > 0 && (
+          <TableRow
+            style={{
+              height: 53 * emptyRows,
+            }}>
+            <TableCell colSpan={6} />
+          </TableRow>
+        )}
+      </TableBody>
+    </>
   );
 };
 
