@@ -1,5 +1,6 @@
-import { Toolbar, Typography, Tooltip, IconButton } from '@mui/material';
+import { Toolbar, Typography, Tooltip, IconButton, Badge } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { alpha } from '@mui/material/styles';
 import { useAppSelector } from 'Store/hooks';
@@ -7,12 +8,18 @@ import { useAppSelector } from 'Store/hooks';
 interface EnhancedTableToolbarProps {
   label: string;
   numSelected: number;
+  filterValue: string;
   handleDelete: () => void;
+  handleEdit: () => void;
+  handleOpenFilter: () => void;
 }
 const EnhancedTableToolbar = ({
   label,
   numSelected,
+  filterValue,
   handleDelete,
+  handleEdit,
+  handleOpenFilter,
 }: EnhancedTableToolbarProps) => {
   const toolbarActions = useAppSelector(
     (state) => state.language.dataTable.toolbar,
@@ -49,15 +56,24 @@ const EnhancedTableToolbar = ({
         </Typography>
       )}
       {numSelected > 0 ? (
-        <Tooltip title={toolbarActions.delete}>
-          <IconButton onClick={handleDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <>
+          <Tooltip title='Edit'>
+            <IconButton disabled={numSelected > 1} onClick={handleEdit}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={toolbarActions.delete}>
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </>
       ) : (
         <Tooltip title={toolbarActions.filter}>
-          <IconButton>
-            <FilterListIcon />
+          <IconButton onClick={handleOpenFilter} aria-label={''}>
+            <Badge badgeContent={1} color='primary' invisible={!filterValue}>
+              <FilterListIcon />
+            </Badge>
           </IconButton>
         </Tooltip>
       )}
