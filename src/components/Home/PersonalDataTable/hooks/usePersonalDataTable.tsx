@@ -10,6 +10,7 @@ import { VaultData } from 'Types/PersonalDataType';
 import getComparator from 'Helpers/compare';
 import { useAppSelector, useAppDispatch } from 'Store/hooks';
 import { removeVaultData } from 'Features/vaultData/vaultData';
+import { useModal } from 'Hooks/useModal';
 
 const usePersonalDataTable = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ const usePersonalDataTable = () => {
   const [selectedFilterCol, setSelectedFilterCol] = useState<string>('id');
   const [filterValue, setFilterValue] = useState<string>('');
   const [vaultData, setVaultData] = useState<VaultData[]>(people);
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - vaultData.length) : 0;
@@ -69,13 +71,17 @@ const usePersonalDataTable = () => {
   };
 
   const handleDelete = () => {
-    console.log(selected);
     dispatch(removeVaultData(selected));
     setSelected([]);
   };
 
   const handleEdit = () => {
-    console.log(selected);
+    openModal();
+  };
+
+  const handleCloseEdit = () => {
+    closeModal();
+    setSelected([]);
   };
 
   const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +91,6 @@ const usePersonalDataTable = () => {
       id: selectedFilterCol as keyof VaultData,
       value: e.target.value,
     };
-    console.log(filter);
 
     const filteredData = people.filter((data) =>
       data[filter.id].includes(filter.value),
@@ -95,12 +100,10 @@ const usePersonalDataTable = () => {
   };
 
   const handleOpenFilter = () => {
-    console.log('open');
     if (people.length) setOpenFilter(true);
   };
 
   const handleCloseFilter = (e: MouseEvent<HTMLElement>) => {
-    console.log('close');
     setOpenFilter(false);
     if (e.currentTarget.tagName === 'BUTTON') {
       setVaultData(people);
@@ -110,9 +113,17 @@ const usePersonalDataTable = () => {
   };
 
   const handleSelectFilterCol = (id: string) => {
-    console.log(id);
     setSelectedFilterCol(id);
     setFilterValue('');
+  };
+
+  const handleSelectedEdit = () => {
+    const vaultDataRow = visibleRows.filter((row) => row.id === selected[0]);
+    const personalDataRow = {
+      ...vaultDataRow[0],
+      date_of_birth: vaultDataRow[0]?.date_of_birth as unknown as Date,
+    };
+    return personalDataRow;
   };
 
   return {
@@ -138,6 +149,9 @@ const usePersonalDataTable = () => {
     handleFilter,
     handleSelectFilterCol,
     handleEdit,
+    isModalOpen,
+    handleCloseEdit,
+    handleSelectedEdit,
   };
 };
 
