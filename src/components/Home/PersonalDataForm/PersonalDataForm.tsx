@@ -4,9 +4,24 @@ import usePersonalDataForm from './hooks/usePersonalDataForm';
 import InputController from 'Components/Utils/InputController/InputController';
 import { useAppSelector } from 'Store/hooks';
 import { shallowEqual } from 'react-redux';
+import { PersonalDataType } from 'Types/PersonalDataType';
 
-const PersonalDataForm = () => {
-  const { methods, handleFormCancel, handleFormSubmit } = usePersonalDataForm();
+interface IPersonalDataFormProps {
+  edit?: boolean;
+  dataToEdit?: PersonalDataType;
+  cancelEdit?: () => void;
+}
+
+const PersonalDataForm = ({
+  edit = false,
+  dataToEdit,
+  cancelEdit,
+}: IPersonalDataFormProps) => {
+  const { methods, handleFormCancel, handleFormSubmit } = usePersonalDataForm(
+    edit,
+    dataToEdit,
+    cancelEdit,
+  );
   const { dataForm, actionButtons } = useAppSelector(
     (state) => ({
       dataForm: state.language.dataForm,

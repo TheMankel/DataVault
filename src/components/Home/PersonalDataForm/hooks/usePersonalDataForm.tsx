@@ -5,10 +5,14 @@ import { nanoid } from 'nanoid';
 import { PersonalDataType } from 'Types/PersonalDataType';
 import PersonalDataSchema from 'Schemas/PersonalDataSchema';
 import { useAppSelector, useAppDispatch } from 'Store/hooks';
-import { addVaultData } from 'Features/vaultData';
+import { addVaultData, editVaultData } from 'Features/vaultData';
 import dayjs from 'dayjs';
 
-const usePersonalDataForm = () => {
+const usePersonalDataForm = (
+  edit: boolean = false,
+  dataToEdit?: PersonalDataType,
+  cancelEdit?: () => void,
+) => {
   const code = useAppSelector((state) => state.language.code);
   const dispatch = useAppDispatch();
 
@@ -16,15 +20,19 @@ const usePersonalDataForm = () => {
     methods.clearErrors();
   }, [code]);
 
-  const defaultValues: PersonalDataType = {
-    id: nanoid(),
-    firstname: '',
-    surname: '',
-    date_of_birth: dayjs(`${dayjs().format('YYYY')}-01-01`).format(
-      'YYYY-MM-DD',
-    ) as unknown as Date,
-    about_you: '',
-  };
+  const defaultValues: PersonalDataType =
+    !edit || !dataToEdit
+      ? {
+          id: nanoid(),
+          firstname: '',
+          surname: '',
+          date_of_birth: dayjs(`${dayjs().format('YYYY')}-01-01`).format(
+            'YYYY-MM-DD',
+          ) as unknown as Date,
+          about_you: '',
+        }
+      : dataToEdit;
+
   const methods = useForm<PersonalDataType>({
     defaultValues: defaultValues,
     resolver: yupResolver(PersonalDataSchema()),
@@ -32,20 +40,26 @@ const usePersonalDataForm = () => {
   });
 
   const handleFormCancel = useCallback(() => {
+    if (edit && cancelEdit) cancelEdit();
     methods.reset();
   }, []);
 
   const handleFormSubmit = useCallback(
     ({ firstname, surname, date_of_birth, about_you }: PersonalDataType) => {
       const data = {
-        id: nanoid(),
+        id: !edit || !dataToEdit ? nanoid() : dataToEdit.id,
         firstname,
         surname,
         date_of_birth: dayjs(date_of_birth).format('YYYY-MM-DD'),
         about_you,
       };
-      console.log(data);
-      dispatch(addVaultData(data));
+
+      if (!edit) dispatch(addVaultData(data));
+      if (edit) {
+        dispatch(editVaultData(data));
+        if (cancelEdit) cancelEdit();
+      }
+
       methods.reset();
     },
     [],

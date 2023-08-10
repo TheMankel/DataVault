@@ -75,7 +75,7 @@ const EnhancedFiltering = ({
           </IconButton>
         </Box>
         <TextField
-          id='standard-select-currency'
+          id='select-filter-column'
           select
           label='Columns'
           fullWidth
@@ -85,6 +85,7 @@ const EnhancedFiltering = ({
           {columns.map((option) => (
             <MenuItem
               key={option.value}
+              id={`select-${option.value}`}
               onClick={() => handleSelectFilterCol(option.value)}
               value={option.value}>
               {option.label}
@@ -92,8 +93,8 @@ const EnhancedFiltering = ({
           ))}
         </TextField>
         <TextField
-          id='standard-basic'
-          label='Standard'
+          id='filter-value'
+          label='Filter value'
           variant='standard'
           placeholder='Filter value'
           fullWidth
