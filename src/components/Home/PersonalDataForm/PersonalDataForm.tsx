@@ -7,7 +7,7 @@ import { shallowEqual } from 'react-redux';
 import { PersonalDataType } from 'Types/PersonalDataType';
 
 interface IPersonalDataFormProps {
-  edit: boolean;
+  edit?: boolean;
   dataToEdit?: PersonalDataType;
   cancelEdit?: () => void;
 }
