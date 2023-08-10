@@ -1,10 +1,5 @@
-import {
-  Box,
-  Table,
-  TableContainer,
-  TablePagination,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Table, TableContainer, TablePagination } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import EnhancedTableToolbar from 'Components/Utils/Table/EnhancedTableToolbar/EnhancedTableToolbar';
 import EnhancedTableHead from 'Components/Utils/Table/EnhancedTableHead/EnhancedTableHead';
 import EnhancedTableBody from 'Components/Utils/Table/EnhancedTableBody/EnhancedTableBody';
@@ -12,118 +7,10 @@ import usePersonalDataTable from './hooks/usePersonalDataTable';
 import { VaultData } from 'Types/PersonalDataType';
 import { useAppSelector } from 'Store/hooks';
 import EnhancedFiltering from 'Components/Utils/Table/EnhancedFiltering/EnhancedFiltering';
+import Modal from 'Components/Utils/Modal/Modal';
+import PersonalDataForm from '../PersonalDataForm/PersonalDataForm';
 
-// function createData(
-//   id: string,
-//   firstname: string,
-//   surname: string,
-//   date_of_birth: string,
-//   about_you: string,
-// ): VaultData {
-//   return {
-//     id,
-//     firstname,
-//     surname,
-//     date_of_birth,
-//     about_you,
-//   };
-// }
-
-// const rows = [
-//   createData(
-//     '1',
-//     'John',
-//     'Doe',
-//     new Date('1990-01-01').toISOString(),
-//     'I am a software engineer.',
-//   ),
-//   createData(
-//     '2',
-//     'Alice',
-//     'Smith',
-//     new Date('1985-05-15').toISOString(),
-//     'I love traveling.',
-//   ),
-//   createData(
-//     '3',
-//     'Bob',
-//     'Johnson',
-//     new Date('1998-11-30').toISOString(),
-//     'I enjoy playing guitar.',
-//   ),
-//   createData(
-//     '4',
-//     'Emily',
-//     'Williams',
-//     new Date('1993-08-22').toISOString(),
-//     'I am a bookworm.',
-//   ),
-//   createData(
-//     '5',
-//     'Michael',
-//     'Brown',
-//     new Date('1976-03-10').toISOString(),
-//     'I am a chef.',
-//   ),
-//   createData(
-//     '6',
-//     'Sophia',
-//     'Lee',
-//     new Date('2000-06-25').toISOString(),
-//     'I am a painter.',
-//   ),
-//   createData(
-//     '7',
-//     'William',
-//     'Martin',
-//     new Date('1982-09-17').toISOString(),
-//     'I am a nature enthusiast.',
-//   ),
-//   createData(
-//     '8',
-//     'Olivia',
-//     'Taylor',
-//     new Date('1995-12-05').toISOString(),
-//     'I love photography.',
-//   ),
-//   createData(
-//     '9',
-//     'James',
-//     'Anderson',
-//     new Date('1991-04-18').toISOString(),
-//     'I am a fitness freak.',
-//   ),
-//   createData(
-//     '10',
-//     'Emma',
-//     'Clark',
-//     new Date('1988-07-12').toISOString(),
-//     'I am a movie buff.',
-//   ),
-//   createData(
-//     '11',
-//     'Alexander',
-//     'Rodriguez',
-//     new Date('1997-02-08').toISOString(),
-//     'I am a foodie.',
-//   ),
-//   createData(
-//     '12',
-//     'Ava',
-//     'White',
-//     new Date('1983-10-29').toISOString(),
-//     'I enjoy gardening.',
-//   ),
-//   createData(
-//     '13',
-//     'Daniel',
-//     'Lopez',
-//     new Date('2002-12-14').toISOString(),
-//     'I am a gamer.',
-//   ),
-// ];
-
-interface HeadCell {
+interface IHeadCell {
   disablePadding: boolean;
   id: keyof VaultData;
   label: string;
@@ -164,16 +51,21 @@ const PersonalDataTable = () => {
     handleFilter,
     handleSelectFilterCol,
     handleEdit,
+    isModalOpen,
+    handleCloseEdit,
+    handleSelectedEdit,
   } = usePersonalDataTable();
 
-  const headCells: readonly HeadCell[] = Object.keys(tableHeads).map((head) => {
-    return {
-      id: head as keyof VaultData,
-      numeric: false,
-      disablePadding: head === 'id' ? true : false,
-      label: tableHeads[head as keyof VaultData],
-    };
-  });
+  const headCells: readonly IHeadCell[] = Object.keys(tableHeads).map(
+    (head) => {
+      return {
+        id: head as keyof VaultData,
+        numeric: false,
+        disablePadding: head === 'id' ? true : false,
+        label: tableHeads[head as keyof VaultData],
+      };
+    },
+  );
 
   return (
     <Box
@@ -237,6 +129,19 @@ const PersonalDataTable = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      <Modal
+        title='Edit data'
+        description='Update all of selected user data'
+        isModalOpen={isModalOpen}
+        closeModal={handleCloseEdit}>
+        <Box p={3}>
+          <PersonalDataForm
+            edit={true}
+            dataToEdit={handleSelectedEdit()}
+            cancelEdit={handleCloseEdit}
+          />
+        </Box>
+      </Modal>
     </Box>
   );
 };
