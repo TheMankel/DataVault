@@ -1,5 +1,9 @@
-import languageReducer, { addVaultData, removeVaultData } from './vaultData';
+import languageReducer, {
+  addVaultData,
+  removeVaultData,
+  editVaultData,
+} from './vaultData';
 
-export { addVaultData, removeVaultData };
+export { addVaultData, removeVaultData, editVaultData };
 
 export default languageReducer;

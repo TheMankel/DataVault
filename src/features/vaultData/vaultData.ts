@@ -14,9 +14,16 @@ const vaultDataSlice = createSlice({
       const arrayOfIdToRemove = action.payload;
       return state.filter((data) => !arrayOfIdToRemove.includes(data.id));
     },
+    editVaultData: (state, action: PayloadAction<VaultData>) => {
+      const editedData = action.payload;
+      return state.map((data) =>
+        data.id === editedData.id ? editedData : data,
+      );
+    },
   },
 });
 
-export const { addVaultData, removeVaultData } = vaultDataSlice.actions;
+export const { addVaultData, removeVaultData, editVaultData } =
+  vaultDataSlice.actions;
 
 export default vaultDataSlice.reducer;
