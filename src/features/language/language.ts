@@ -22,6 +22,7 @@ interface ILanguage {
       rows_per_page: string;
       toolbar: {
         delete: string;
+        edit: string;
         filter: string;
       };
     };
@@ -60,7 +61,7 @@ const languageValues: ILanguage = {
       message: 'Nie znaleziono danych',
       selected: 'wybrano',
       rows_per_page: 'Wiersze na stronę',
-      toolbar: { delete: 'Usuń', filter: 'Filtruj' },
+      toolbar: { delete: 'Usuń', edit: 'Edytuj', filter: 'Filtruj' },
     },
     actionButtons: {
       cancel: 'Anuluj',
@@ -94,7 +95,7 @@ const languageValues: ILanguage = {
       message: 'No records found',
       selected: 'selected',
       rows_per_page: 'Rows per page',
-      toolbar: { delete: 'Delete', filter: 'Filter' },
+      toolbar: { delete: 'Delete', edit: 'Edit', filter: 'Filter' },
     },
     actionButtons: {
       cancel: 'Cancel',
