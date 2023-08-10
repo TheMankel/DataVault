@@ -2,15 +2,15 @@ import { ChangeEvent } from 'react';
 import { TableHead, TableRow, TableCell, Checkbox } from '@mui/material';
 import TableHeadCell from '../TableHeadCell/TableHeadCell';
 
-interface HeadCell {
+interface IHeadCell {
   disablePadding: boolean;
   id: string;
   label: string;
   numeric: boolean;
 }
 
-interface EnhancedTableProps {
-  headCells: readonly HeadCell[];
+interface IEnhancedTableProps {
+  headCells: readonly IHeadCell[];
   numSelected: number;
   onRequestSort: (property: string) => void;
   onSelectAllClick: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -27,7 +27,7 @@ const EnhancedTableHead = ({
   numSelected,
   rowCount,
   onRequestSort,
-}: EnhancedTableProps) => {
+}: IEnhancedTableProps) => {
   const createSortHandler = (property: string) => {
     onRequestSort(property);
   };

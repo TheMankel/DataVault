@@ -1,13 +1,13 @@
 import { object, string, date, setLocale } from 'yup';
 import { useAppSelector } from 'Store/hooks';
 
-interface Translations {
+interface ITranslations {
   [locale: string]: {
     [key: string]: string;
   };
 }
 
-const translations: Translations = {
+const translations: ITranslations = {
   GB: {
     required: 'Please provide a value',
     min: 'Value must have at least ${min} characters',

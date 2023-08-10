@@ -13,7 +13,17 @@ const AppLayout = () => {
       }}>
       <Header />
       <CssBaseline />
-      <Container component='main' maxWidth='md' sx={{ mt: 4 }}>
+      <Container
+        component='main'
+        maxWidth='md'
+        sx={{
+          mt: 4,
+          p: {
+            xs: 1,
+            sm: 2,
+            md: 3,
+          },
+        }}>
         <Outlet />
       </Container>
       <Footer />

@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, MutableRefObject, ChangeEvent } from 'react';
+import { Dispatch, SetStateAction, MutableRefObject } from 'react';
 import { TableBody, TableRow, TableCell, Box } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import EnhancedTableRow from '../EnhancedTableRow/EnhancedTableRow';
 import { useAppSelector } from 'Store/hooks';
 
-interface EnhancedTableBodyProps<T> {
+interface IEnhancedTableBodyProps<T> {
   emptyRows: number;
   visibleRows: T[];
   selected: readonly string[];
@@ -18,8 +18,9 @@ const EnhancedTableBody = <T extends { id: string }>({
   selected,
   handleSelected,
   anchorFilterEl,
-}: EnhancedTableBodyProps<T>) => {
+}: IEnhancedTableBodyProps<T>) => {
   const message = useAppSelector((state) => state.language.dataTable.message);
+
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   const handleClick = (name: string) => {

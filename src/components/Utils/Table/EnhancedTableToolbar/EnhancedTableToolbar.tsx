@@ -13,6 +13,7 @@ interface EnhancedTableToolbarProps {
   handleEdit: () => void;
   handleOpenFilter: () => void;
 }
+
 const EnhancedTableToolbar = ({
   label,
   numSelected,
@@ -27,6 +28,7 @@ const EnhancedTableToolbar = ({
 
   return (
     <Toolbar
+      id='toolbar'
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
@@ -39,25 +41,15 @@ const EnhancedTableToolbar = ({
         }),
       }}>
       {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color='inherit'
-          variant='subtitle1'
-          component='div'>
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant='h6'
-          id='tableTitle'
-          component='div'>
-          {label}
-        </Typography>
-      )}
-      {numSelected > 0 ? (
         <>
-          <Tooltip title='Edit'>
+          <Typography
+            sx={{ flex: '1 1 100%' }}
+            color='inherit'
+            variant='subtitle1'
+            component='div'>
+            {numSelected} selected
+          </Typography>
+          <Tooltip title={toolbarActions.edit}>
             <IconButton disabled={numSelected > 1} onClick={handleEdit}>
               <EditIcon />
             </IconButton>
@@ -69,13 +61,28 @@ const EnhancedTableToolbar = ({
           </Tooltip>
         </>
       ) : (
-        <Tooltip title={toolbarActions.filter}>
-          <IconButton onClick={handleOpenFilter} aria-label={''}>
-            <Badge badgeContent={1} color='primary' invisible={!filterValue}>
-              <FilterListIcon />
-            </Badge>
-          </IconButton>
-        </Tooltip>
+        <>
+          <Typography
+            variant='h6'
+            id='tableTitle'
+            component='div'
+            sx={{
+              flex: '1 1 100%',
+              fontSize: {
+                xs: '1rem',
+                md: '1.25rem',
+              },
+            }}>
+            {label}
+          </Typography>
+          <Tooltip title={toolbarActions.filter}>
+            <IconButton onClick={handleOpenFilter}>
+              <Badge badgeContent={1} color='primary' invisible={!filterValue}>
+                <FilterListIcon />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+        </>
       )}
     </Toolbar>
   );
