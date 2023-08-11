@@ -25,7 +25,11 @@ const TableHeadCell = ({
       id={id}
       align={numeric ? 'right' : 'left'}
       padding={disablePadding ? 'none' : 'normal'}
-      sortDirection={orderBy === id ? order : false}>
+      sortDirection={orderBy === id ? order : false}
+      sx={{
+        borderBottom: '1px solid',
+        borderColor: 'divider',
+      }}>
       <TableSortLabel
         active={orderBy === id}
         direction={orderBy === id ? order : 'asc'}

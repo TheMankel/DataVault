@@ -35,7 +35,12 @@ const EnhancedTableHead = ({
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding='checkbox'>
+        <TableCell
+          padding='checkbox'
+          sx={{
+            borderBottom: '1px solid',
+            borderColor: 'divider',
+          }}>
           <Checkbox
             color='primary'
             indeterminate={numSelected > 0 && numSelected < rowCount}

@@ -17,7 +17,7 @@ const AppLayout = () => {
         component='main'
         maxWidth='md'
         sx={{
-          mt: 4,
+          my: 3,
           p: {
             xs: 1,
             sm: 2,

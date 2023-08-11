@@ -17,6 +17,7 @@ const LanguageMenuList = <T extends { id: string }>({
 
   return (
     <Paper
+      elevation={3}
       sx={{
         position: 'absolute',
         top: '100%',

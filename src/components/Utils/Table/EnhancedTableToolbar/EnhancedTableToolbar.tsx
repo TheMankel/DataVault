@@ -50,9 +50,11 @@ const EnhancedTableToolbar = ({
             {numSelected} selected
           </Typography>
           <Tooltip title={toolbarActions.edit}>
-            <IconButton disabled={numSelected > 1} onClick={handleEdit}>
-              <EditIcon />
-            </IconButton>
+            <span>
+              <IconButton disabled={numSelected > 1} onClick={handleEdit}>
+                <EditIcon />
+              </IconButton>
+            </span>
           </Tooltip>
           <Tooltip title={toolbarActions.delete}>
             <IconButton onClick={handleDelete}>
