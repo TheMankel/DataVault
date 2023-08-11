@@ -21,9 +21,10 @@ const Header = () => {
 
   return (
     <AppBar
+      elevation={3}
       component='header'
       position='sticky'
-      sx={{ backgroundColor: 'background.default' }}>
+      sx={{ bgcolor: 'background.paper' }}>
       <Container maxWidth='lg'>
         <Toolbar
           sx={{

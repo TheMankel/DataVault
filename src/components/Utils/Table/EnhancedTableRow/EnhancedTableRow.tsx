@@ -3,6 +3,7 @@ import stringFormat from 'Helpers/stringFormat';
 
 interface IEnhancedTableRowProps {
   row: Record<string, string>;
+  last: boolean;
   isSelected: boolean;
   labelId: string;
   handleClick: (name: string) => void;
@@ -10,6 +11,7 @@ interface IEnhancedTableRowProps {
 
 const EnhancedTableRow = ({
   row,
+  last,
   isSelected,
   labelId,
   handleClick,
@@ -22,8 +24,16 @@ const EnhancedTableRow = ({
       aria-checked={isSelected}
       tabIndex={-1}
       selected={isSelected}
-      sx={{ cursor: 'pointer' }}>
-      <TableCell component='th' id={labelId} scope='row' padding='checkbox'>
+      sx={{ height: 53, cursor: 'pointer' }}>
+      <TableCell
+        component='th'
+        id={labelId}
+        scope='row'
+        padding='checkbox'
+        sx={{
+          borderBottom: last ? 'none' : '1px solid',
+          borderColor: 'divider',
+        }}>
         <Checkbox
           color='primary'
           checked={isSelected}
@@ -36,7 +46,11 @@ const EnhancedTableRow = ({
         <TableCell
           key={cell}
           padding={cell === 'id' ? 'none' : 'normal'}
-          id={cell}>
+          id={cell}
+          sx={{
+            borderBottom: last ? 'none' : '1px solid',
+            borderColor: 'divider',
+          }}>
           {stringFormat(row[cell])}
         </TableCell>
       ))}

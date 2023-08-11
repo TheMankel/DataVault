@@ -1,7 +1,7 @@
-import Data from 'Components/PersonalData/PersonalData';
+import PersonalData from 'Components/PersonalData/PersonalData';
 
 const DataPage = () => {
-  return <Data />;
+  return <PersonalData />;
 };
 
 export default DataPage;

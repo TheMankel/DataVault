@@ -26,7 +26,7 @@ const Copyright = ({ authors }: IAuthorsProps) => {
   ));
 
   return (
-    <Typography variant='body2' color='text.secondary' align='center'>
+    <Typography variant='body2' align='center'>
       {'Copyright © '}
       {links}
       {new Date().getFullYear()}

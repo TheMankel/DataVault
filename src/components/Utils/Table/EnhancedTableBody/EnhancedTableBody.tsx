@@ -46,13 +46,31 @@ const EnhancedTableBody = <T extends { id: string }>({
   if (!visibleRows.length)
     return (
       <TableBody ref={anchorFilterEl}>
-        <TableRow>
-          <TableCell id='no-data' colSpan={6} align='center'>
+        <TableRow
+          sx={{
+            height: 53,
+          }}>
+          <TableCell
+            id='no-data'
+            colSpan={12}
+            sx={{
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}>
             <Box
               display='flex'
               justifyContent='center'
               alignItems='center'
-              gap={1}>
+              gap={1}
+              position='absolute'
+              height={53}
+              width={1}
+              maxWidth={240}
+              sx={{
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                pointerEvents: 'none',
+              }}>
               <InfoOutlinedIcon fontSize='small' />
               {message}
             </Box>
@@ -71,6 +89,7 @@ const EnhancedTableBody = <T extends { id: string }>({
           return (
             <EnhancedTableRow
               key={row.id}
+              last={index === visibleRows.length - 1}
               row={row}
               isSelected={isItemSelected}
               labelId={labelId}
@@ -83,7 +102,14 @@ const EnhancedTableBody = <T extends { id: string }>({
             style={{
               height: 53 * emptyRows,
             }}>
-            <TableCell colSpan={6} />
+            <TableCell
+              colSpan={12}
+              sx={{
+                borderTop: '1px solid',
+                borderBottom: 'none',
+                borderColor: 'divider',
+              }}
+            />
           </TableRow>
         )}
       </TableBody>
