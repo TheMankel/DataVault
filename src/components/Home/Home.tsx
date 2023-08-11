@@ -6,19 +6,9 @@ import useTabs from 'Components/Utils/TabsBox/hooks/useTabs';
 import PersonalDataForm from './PersonalDataForm/PersonalDataForm';
 import PersonalDataTable from './PersonalDataTable/PersonalDataTable';
 import { useAppSelector } from 'Store/hooks';
-// import { shallowEqual } from 'react-redux';
-
-// const tabLabels = [{ label: 'Data Form' }, { label: 'Data Table' }];
 
 const Home = () => {
   const { tabId, handleChangeTab } = useTabs();
-  // const tabLabels = useAppSelector(
-  //   (state) => [
-  //     { label: state.language.data.dataForm.label },
-  //     { label: state.language.data.dataTable.label },
-  //   ],
-  //   shallowEqual,
-  // );
 
   const dataFormLabel = useAppSelector(
     (state) => state.language.dataForm.label,
