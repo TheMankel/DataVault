@@ -1,58 +1,31 @@
-import { object, string, date, setLocale } from 'yup';
+import { object, string, date } from 'yup';
 import { useAppSelector } from 'Store/hooks';
-
-interface ITranslations {
-  [locale: string]: {
-    [key: string]: string;
-  };
-}
-
-const translations: ITranslations = {
-  GB: {
-    required: 'Please provide a value',
-    min: 'Value must have at least ${min} characters',
-    max: 'Value must not exceed ${max} characters',
-  },
-  PL: {
-    required: 'Proszę podać wartość',
-    min: 'Wartość musi mieć co najmniej ${min} znaków',
-    max: 'Wartość nie może przekraczać ${max} znaków',
-  },
-};
-
-const setTranslations = (locale: string) => {
-  const translation = translations[locale];
-  if (translation) {
-    setLocale({ mixed: translation });
-  } else {
-    throw new Error(`Translations for locale "${locale}" not found`);
-  }
-};
 
 const PersonalDataSchema = () => {
   const errors = useAppSelector((state) => state.language.errors);
 
   return object().shape({
-    id: string().trim().required('ID is required'),
+    id: string().trim().required(errors.form.id.required),
     firstname: string()
       .trim()
-      .required(errors.required)
-      .min(3, 'Firstname must have at least 3 characters')
-      .max(20, 'Firstname must not be longer than 20 characters'),
+      .required(errors.form.firstname.required)
+      .min(3, errors.form.firstname.min)
+      .max(20, errors.form.firstname.max),
     surname: string()
       .trim()
-      .required('Please provide your surname')
-      .min(3, 'Surname must have at least 3 characters')
-      .max(20, 'Surname must not be longer than 20 characters'),
+      .required(errors.form.surname.required)
+      .min(3, errors.form.surname.min)
+      .max(20, errors.form.surname.max),
     date_of_birth: date()
       .default(() => new Date())
-      .required('Please provide your date of birth')
-      .max(new Date(), 'Future date not allowed'),
+      .required(errors.form.date_of_birth.required)
+      .typeError(errors.form.date_of_birth.typeError)
+      .max(new Date(), errors.form.date_of_birth.max),
     about_you: string()
       .trim()
-      .required('Please write something about you')
-      .min(3, 'Text must have at least 3 characters')
-      .max(250, 'Text must not be longer than 250 characters'),
+      .required(errors.form.about_you.required)
+      .min(3, errors.form.about_you.min)
+      .max(250, errors.form.about_you.max),
   });
 };
 
