@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { VaultData } from 'Types/PersonalDataType';
+import manageLocalStorage from 'Helpers/manageLocalStorage';
 
 interface ILanguage {
   [key: string]: {
@@ -31,7 +32,31 @@ interface ILanguage {
       submit: string;
     };
     errors: {
-      required: string;
+      form: {
+        id: {
+          required: string;
+        };
+        firstname: {
+          required: string;
+          min: string;
+          max: string;
+        };
+        surname: {
+          required: string;
+          min: string;
+          max: string;
+        };
+        date_of_birth: {
+          required: string;
+          typeError: string;
+          max: string;
+        };
+        about_you: {
+          required: string;
+          min: string;
+          max: string;
+        };
+      };
     };
   };
 }
@@ -68,7 +93,31 @@ const languageValues: ILanguage = {
       submit: 'Wyślij',
     },
     errors: {
-      required: 'Proszę podać swoje imię',
+      form: {
+        id: {
+          required: 'ID jest wymagane',
+        },
+        firstname: {
+          required: 'Proszę podać swoje imię',
+          min: 'Imię musi mieć co najmniej 3 znaki',
+          max: 'Imię nie może mieć więcej niż 20 znaków',
+        },
+        surname: {
+          required: 'Proszę podać swoje nazwisko',
+          min: 'Nazwisko musi mieć co najmniej 3 znaki',
+          max: 'Nazwisko nie może mieć więcej niż 20 znaków',
+        },
+        date_of_birth: {
+          required: 'Proszę podać swoją datę urodzenia',
+          typeError: 'Proszę wprowadzić datę zgodną z formatem DD.MM.YYYY',
+          max: 'Nie można podać przyszłej daty',
+        },
+        about_you: {
+          required: 'Proszę napisać coś o sobie',
+          min: 'Tekst musi mieć co najmniej 3 znaki',
+          max: 'Tekst nie może mieć więcej niż 250 znaków',
+        },
+      },
     },
   },
   GB: {
@@ -102,13 +151,42 @@ const languageValues: ILanguage = {
       submit: 'Submit',
     },
     errors: {
-      required: 'Please provide your firstname',
+      form: {
+        id: {
+          required: 'ID is required',
+        },
+        firstname: {
+          required: 'Please provide your firstname',
+          min: 'Firstname must have at least 3 characters',
+          max: 'Firstname must not be longer than 20 characters',
+        },
+        surname: {
+          required: 'Please provide your surname',
+          min: 'Surname must have at least 3 characters',
+          max: 'Surname must not be longer than 20 characters',
+        },
+        date_of_birth: {
+          required: 'Please provide your date of birth',
+          typeError: 'Please enter a date according to the format DD.MM.YYYY',
+          max: 'Future date not allowed',
+        },
+        about_you: {
+          required: 'Please write something about you',
+          min: 'Text must have at least 3 characters',
+          max: 'Text must not be longer than 250 characters',
+        },
+      },
     },
   },
 };
 
+const selectedLanguage = manageLocalStorage.loadFromLocalStorage(
+  'language',
+  'PL',
+);
+
 const initialState = {
-  ...languageValues.PL,
+  ...languageValues[selectedLanguage],
 };
 
 const languageSlice = createSlice({
@@ -118,8 +196,10 @@ const languageSlice = createSlice({
     handleLanguage: (_, action: PayloadAction<string>) => {
       const languageCode = action.payload;
       const language = languageValues[languageCode];
-      if (language) return language;
-      else {
+      if (language) {
+        manageLocalStorage.saveToLocalStorage('language', languageCode);
+        return language;
+      } else {
         throw new Error('Selected language is not supported');
       }
     },
