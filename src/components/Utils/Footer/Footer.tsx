@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Paper } from '@mui/material';
 import Copyright from './Copyright/Copyright';
 
 const Footer = () => {
@@ -7,16 +7,17 @@ const Footer = () => {
   ];
 
   return (
-    <Box
+    <Paper
+      elevation={3}
       component='footer'
       sx={{
         py: 3,
         px: 2,
         mt: 'auto',
-        backgroundColor: (theme) => theme.palette.grey[100],
+        borderRadius: 0,
       }}>
       <Copyright authors={authors} />
-    </Box>
+    </Paper>
   );
 };
 
