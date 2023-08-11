@@ -4,10 +4,14 @@ CRUD application for personal data management
 
 ## Features
 
-- Create personal data records
-- Subpage displaying added data
-- Edit or delete existing data
-- Select language (English, Polish)
+- Creating personal data records
+- Editing or deleting existing data
+- Dynamic filtering of data in a table by a selected column
+- Sorting data in a table by a selected column
+- Presentation of data on a separate subpage
+- Validation of data entered into forms
+- Language selection (English, Polish)
+- Storing data in LocalStorage
 
 ## Stack
 
@@ -18,4 +22,5 @@ CRUD application for personal data management
 - MaterialUI
 - React Hook Form
 - Yup
+- Cypress
 - Vite
