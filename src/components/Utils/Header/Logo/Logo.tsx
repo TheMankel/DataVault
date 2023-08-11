@@ -18,7 +18,7 @@ const Logo = ({ title, ...rest }: ILogoProps) => {
         alignItems='center'
         {...rest}>
         <img
-          src='/vite.svg'
+          src='/Logo.svg'
           alt='Logo'
           style={{
             height: '56px',
