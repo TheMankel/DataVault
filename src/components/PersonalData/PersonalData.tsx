@@ -7,7 +7,9 @@ import NoData from 'Assets/NoData.svg';
 const PersonalData = () => {
   const personalData = useAppSelector((state) => state.vault);
   const home = useAppSelector((state) => state.language.urls.main);
-  const messages = useAppSelector((state) => state.language.dataPage.messages);
+  const messages = useAppSelector(
+    (state) => state.language.errors.dataPage.messages,
+  );
 
   if (!personalData.length)
     return (
