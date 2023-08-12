@@ -24,3 +24,4 @@ CRUD application for personal data management
 - Yup
 - Cypress
 - Vite
+- Figma
