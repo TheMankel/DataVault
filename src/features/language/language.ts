@@ -31,6 +31,12 @@ interface ILanguage {
       cancel: string;
       submit: string;
     };
+    dataPage: {
+      messages: {
+        primary: string;
+        secondary: string;
+      };
+    };
     errors: {
       form: {
         id: {
@@ -92,6 +98,12 @@ const languageValues: ILanguage = {
       cancel: 'Anuluj',
       submit: 'Wyślij',
     },
+    dataPage: {
+      messages: {
+        primary: 'Nie znaleziono danych',
+        secondary: 'Dodaj kilka na stronie głównej',
+      },
+    },
     errors: {
       form: {
         id: {
@@ -149,6 +161,12 @@ const languageValues: ILanguage = {
     actionButtons: {
       cancel: 'Cancel',
       submit: 'Submit',
+    },
+    dataPage: {
+      messages: {
+        primary: 'No data found',
+        secondary: 'Add some on the homepage',
+      },
     },
     errors: {
       form: {
