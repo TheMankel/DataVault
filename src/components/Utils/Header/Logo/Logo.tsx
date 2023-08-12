@@ -34,7 +34,7 @@ const Logo = ({ title, ...rest }: ILogoProps) => {
           sx={{
             flex: 1,
             '&:hover': {
-              color: 'text.secondary',
+              color: 'primary.main',
             },
           }}>
           {title}

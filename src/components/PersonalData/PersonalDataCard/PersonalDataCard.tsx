@@ -15,7 +15,7 @@ const PersonalDataCard = ({ personData }: IPersonalDataCardProps) => {
         justifyContent: 'space-between',
       }}>
       <CardContent>
-        <Typography variant='h5' component='div'>
+        <Typography variant='h5' color='primary.main' component='div'>
           {personData.firstname} {personData.surname}
         </Typography>
         <Typography color='text.secondary' gutterBottom>

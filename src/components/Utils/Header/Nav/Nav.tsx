@@ -38,13 +38,13 @@ const Nav = <T extends { name: string; url: string }>({
           fontSize='1.25rem'
           sx={{
             '&.active': {
-              borderBottomWidth: '4px',
+              borderBottomWidth: '2px',
               borderBottomStyle: 'solid',
               borderColor: 'primary.main',
               paddingBottom: '18px',
             },
             '&:hover': {
-              color: 'text.secondary',
+              color: 'primary.main',
             },
           }}>
           {page.name}
@@ -61,7 +61,7 @@ const Nav = <T extends { name: string; url: string }>({
           justifyContent: 'center',
           alignItems: 'center',
           '&.active .link': {
-            borderBottomWidth: '4px',
+            borderBottomWidth: '2px',
             borderBottomStyle: 'solid',
             borderColor: 'primary.main',
           },
