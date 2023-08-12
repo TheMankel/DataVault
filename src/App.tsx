@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import DataPage from './pages/DataPage';
-import AppLayout from './layouts/AppLayout';
+import HomePage from 'Pages/HomePage';
+import DataPage from 'Pages/DataPage';
+import NotFoundPage from 'Pages/NotFoundPage';
+import AppLayout from 'Layouts/AppLayout';
 import { ThemeProvider } from '@mui/material';
-import theme from './theme/theme';
+import theme from 'Theme/theme';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path='/' element={<AppLayout />}>
           <Route index element={<HomePage />} />
           <Route path='data' element={<DataPage />} />
-          {/* <Route path="*" element={<NoMatch />} /> */}
+          <Route path='/*' element={<NotFoundPage />} />
         </Route>
       </Routes>
     </ThemeProvider>
