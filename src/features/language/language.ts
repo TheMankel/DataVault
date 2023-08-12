@@ -31,12 +31,6 @@ interface ILanguage {
       cancel: string;
       submit: string;
     };
-    dataPage: {
-      messages: {
-        primary: string;
-        secondary: string;
-      };
-    };
     errors: {
       form: {
         id: {
@@ -62,6 +56,15 @@ interface ILanguage {
           min: string;
           max: string;
         };
+      };
+      dataPage: {
+        messages: {
+          primary: string;
+          secondary: string;
+        };
+      };
+      notFoundPage: {
+        message: string;
       };
     };
   };
@@ -98,12 +101,6 @@ const languageValues: ILanguage = {
       cancel: 'Anuluj',
       submit: 'Wyślij',
     },
-    dataPage: {
-      messages: {
-        primary: 'Nie znaleziono danych',
-        secondary: 'Dodaj kilka na stronie głównej',
-      },
-    },
     errors: {
       form: {
         id: {
@@ -129,6 +126,15 @@ const languageValues: ILanguage = {
           min: 'Tekst musi mieć co najmniej 3 znaki',
           max: 'Tekst nie może mieć więcej niż 250 znaków',
         },
+      },
+      dataPage: {
+        messages: {
+          primary: 'Nie znaleziono danych',
+          secondary: 'Dodaj kilka na stronie głównej',
+        },
+      },
+      notFoundPage: {
+        message: 'Oops! Wygląda na to, że wszedłeś na zły link',
       },
     },
   },
@@ -162,12 +168,6 @@ const languageValues: ILanguage = {
       cancel: 'Cancel',
       submit: 'Submit',
     },
-    dataPage: {
-      messages: {
-        primary: 'No data found',
-        secondary: 'Add some on the homepage',
-      },
-    },
     errors: {
       form: {
         id: {
@@ -193,6 +193,15 @@ const languageValues: ILanguage = {
           min: 'Text must have at least 3 characters',
           max: 'Text must not be longer than 250 characters',
         },
+      },
+      dataPage: {
+        messages: {
+          primary: 'No data found',
+          secondary: 'Add some on the homepage',
+        },
+      },
+      notFoundPage: {
+        message: 'Oops! Looks like you followed a bad link',
       },
     },
   },
