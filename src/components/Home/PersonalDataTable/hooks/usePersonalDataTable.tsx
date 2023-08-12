@@ -127,6 +127,7 @@ const usePersonalDataTable = () => {
   };
 
   return {
+    vaultData,
     order,
     orderBy,
     selected,
