@@ -29,6 +29,7 @@ const PersonalDataTable = () => {
     (state) => state.language.dataTable.rows_per_page,
   );
   const {
+    vaultData,
     order,
     orderBy,
     selected,
@@ -83,15 +84,17 @@ const PersonalDataTable = () => {
         handleEdit={handleEdit}
         handleOpenFilter={handleOpenFilter}
       />
-      <TableContainer>
+      <TableContainer
+        sx={{
+          maxHeight: 323,
+        }}>
         <Table
+          aria-labelledby='VaultTable'
           sx={{
             minWidth: 750,
-            maxHeight: 1000,
             borderTop: '1px solid',
             borderColor: 'divider',
-          }}
-          aria-labelledby='VaultTable'>
+          }}>
           <EnhancedTableHead
             headCells={headCells}
             numSelected={selected.length}
@@ -99,7 +102,7 @@ const PersonalDataTable = () => {
             orderBy={orderBy}
             onSelectAllClick={handleSelectAllClick}
             onRequestSort={handleRequestSort}
-            rowCount={visibleRows.length}
+            rowCount={vaultData.length}
           />
           <EnhancedTableBody
             emptyRows={emptyRows}
@@ -122,12 +125,16 @@ const PersonalDataTable = () => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component='div'
-        count={visibleRows.length}
+        count={vaultData.length}
         rowsPerPage={rowsPerPage}
         labelRowsPerPage={matches && rowsPerPageLabel}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          borderTop: '1px solid',
+          borderColor: 'divider',
+        }}
       />
       <Modal
         title='Edit data'
