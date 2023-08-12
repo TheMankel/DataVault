@@ -17,18 +17,21 @@ export const themeOptions: ThemeOptions = {
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        '::-webkit-scrollbar': {
-          width: '6px',
-        },
-        '::-webkit-scrollbar-thumb': {
-          background: '#ffd50f',
-          borderRadius: '10px',
-        },
-        '::-webkit-scrollbar-thumb:hover': {
-          background: '#ffa70f',
-        },
-        '::-webkit-scrollbar-track': {
-          background: '#2b3038',
+        '@media (min-width: 1000px)': {
+          '::-webkit-scrollbar': {
+            width: '6px',
+            height: '6px',
+          },
+          '::-webkit-scrollbar-thumb': {
+            background: '#ffd50f',
+            borderRadius: '10px',
+          },
+          '::-webkit-scrollbar-thumb:hover': {
+            background: '#ffa70f',
+          },
+          '::-webkit-scrollbar-track': {
+            background: '#2b3038',
+          },
         },
       },
     },
