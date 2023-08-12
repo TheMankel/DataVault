@@ -15,7 +15,8 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  minWidth: 300,
+  maxWidth: 400,
   bgcolor: 'background.paper',
   borderRadius: 1,
   boxShadow: 24,
@@ -42,7 +43,7 @@ const Modal = ({
           justifyContent='space-between'
           alignItems='center'
           borderBottom={1}
-          sx={{ borderColor: 'text.secondary' }}>
+          sx={{ borderColor: 'divider' }}>
           <Typography id='transition-modal-title' variant='h6' component='h2'>
             {title}
           </Typography>
