@@ -23,9 +23,11 @@
       "Helpers/*": ["./src/helpers/*"],
       "Hooks/*": ["./src/hooks/*"],
       "Layouts/*": ["./src/layouts/*"],
+      "Mock/*": ["./src/mock/*"],
       "Pages/*": ["./src/pages/*"],
       "Schemas/*": ["./src/schemas/*"],
       "Store/*": ["./src/store/*"],
+      "Theme/*": ["./src/theme/*"],
       "Types/*": ["./src/types/*"]
     }
   },
