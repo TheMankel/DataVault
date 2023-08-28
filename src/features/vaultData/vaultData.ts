@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { VaultData } from 'Types/PersonalDataType';
 import manageLocalStorage from 'Helpers/manageLocalStorage';
-// import MockPersonalData from 'Mock/MockPersonalData';
+import MockPersonalData from 'Mock/MockPersonalData';
 
 const initialState: VaultData[] = manageLocalStorage.loadFromLocalStorage(
   'vaultData',
-  [],
+  MockPersonalData,
 );
 
 const vaultDataSlice = createSlice({
