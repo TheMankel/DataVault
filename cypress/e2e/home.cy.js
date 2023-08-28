@@ -97,19 +97,29 @@ describe('home page', () => {
         .uncheck()
         .should('not.be.checked');
 
-      cy.get('tbody tr').within(() => {
-        cy.get('td#id').should('not.be.empty');
-        cy.get('td#firstname').should('have.text', testPersonData.firstname);
-        cy.get('td#surname').should('have.text', testPersonData.surname);
-        cy.get('td#date_of_birth').should(
-          'have.text',
-          testPersonData.date_of_birth,
-        );
-        cy.get('td#about_you').should(
-          'have.text',
-          `${testPersonData.about_you.substring(0, 10)}...`,
-        );
-      });
+      cy.get('tbody').should('exist');
+      cy.get('thead tr>th#surname')
+        .click()
+        .should(($element) => {
+          expect($element).to.have.attr('scope', 'col');
+          expect($element).to.have.attr('aria-sort', 'ascending');
+        });
+
+      cy.get('tbody tr')
+        .eq(1)
+        .within(() => {
+          cy.get('td#id').should('not.be.empty');
+          cy.get('td#firstname').should('have.text', testPersonData.firstname);
+          cy.get('td#surname').should('have.text', testPersonData.surname);
+          cy.get('td#date_of_birth').should(
+            'have.text',
+            testPersonData.date_of_birth,
+          );
+          cy.get('td#about_you').should(
+            'have.text',
+            `${testPersonData.about_you.substring(0, 10)}...`,
+          );
+        });
     });
 
     it('can delete data', () => {
@@ -122,10 +132,7 @@ describe('home page', () => {
         .check()
         .should('be.checked');
       cy.get('button[aria-label="Usuń"]').should('exist').click();
-      cy.get('tbody tr>td#no-data').should(
-        'have.text',
-        'Nie znaleziono danych',
-      );
+      cy.get('tbody tr').should('have.length', 1);
     });
 
     it('can edit data', () => {
@@ -137,10 +144,19 @@ describe('home page', () => {
       };
 
       cy.get('#full-width-tabpanel-1').click();
+      cy.get('tbody').should('exist');
+      cy.get('thead tr>th#surname')
+        .click()
+        .should(($element) => {
+          expect($element).to.have.attr('scope', 'col');
+          expect($element).to.have.attr('aria-sort', 'ascending');
+        });
+
       cy.get('tbody')
         .should('exist')
         .find('tr')
         .should('have.length.at.least', 1)
+        .eq(1)
         .find('th input[type="checkbox"]')
         .check()
         .should('be.checked');
@@ -177,19 +193,32 @@ describe('home page', () => {
         .uncheck()
         .should('not.be.checked');
 
-      cy.get('tbody tr').within(() => {
-        cy.get('td#id').should('not.be.empty');
-        cy.get('td#firstname').should('have.text', editedPersonData.firstname);
-        cy.get('td#surname').should('have.text', editedPersonData.surname);
-        cy.get('td#date_of_birth').should(
-          'have.text',
-          editedPersonData.date_of_birth,
-        );
-        cy.get('td#about_you').should(
-          'have.text',
-          `${editedPersonData.about_you.substring(0, 10)}...`,
-        );
-      });
+      cy.get('tbody').should('exist');
+      cy.get('thead tr>th#date_of_birth')
+        .click()
+        .should(($element) => {
+          expect($element).to.have.attr('scope', 'col');
+          expect($element).to.have.attr('aria-sort', 'ascending');
+        });
+
+      cy.get('tbody tr')
+        .eq(0)
+        .within(() => {
+          cy.get('td#id').should('not.be.empty');
+          cy.get('td#firstname').should(
+            'have.text',
+            editedPersonData.firstname,
+          );
+          cy.get('td#surname').should('have.text', editedPersonData.surname);
+          cy.get('td#date_of_birth').should(
+            'have.text',
+            editedPersonData.date_of_birth,
+          );
+          cy.get('td#about_you').should(
+            'have.text',
+            `${editedPersonData.about_you.substring(0, 10)}...`,
+          );
+        });
     });
   });
 
@@ -240,7 +269,7 @@ describe('home page', () => {
       cy.get('tbody tr>td#id').should('not.be.empty');
       testDataArray.forEach((testPersonData, index) => {
         cy.get('tbody tr')
-          .eq(index)
+          .eq(index + 3)
           .within(() => {
             cy.get('#firstname').should('contain', testPersonData.firstname);
             cy.get('#surname').should('contain', testPersonData.surname);
@@ -275,7 +304,7 @@ describe('home page', () => {
       cy.get('tbody tr').should('have.length.at.least', 2);
     });
 
-    it('filters data by Firstname', () => {
+    it('filters data by attributes', () => {
       const attributesToTest = [
         'firstname',
         'surname',

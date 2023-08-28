@@ -41,7 +41,7 @@ const Nav = <T extends { name: string; url: string }>({
               borderBottomWidth: '2px',
               borderBottomStyle: 'solid',
               borderColor: 'primary.main',
-              paddingBottom: '18px',
+              paddingBottom: '20px',
             },
             '&:hover': {
               color: 'primary.main',

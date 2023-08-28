@@ -70,7 +70,7 @@ const PersonalData = () => {
 
   return (
     <Box>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ p: 2 }}>
         {personalData.map((personData) => (
           <Grid key={personData.id} item xs={12} sm={6} lg={4}>
             <PersonalDataCard personData={personData} />
